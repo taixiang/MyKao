@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.kaoyan.R;
 import com.kaoyan.utils.LogUtil;
+import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -112,12 +113,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     @Override
     public void showLoading() {
-
+        new LoadingDialog(mActivity).showDialog();
     }
 
     @Override
     public void hideLoading() {
-
+//        LoadingDialog.dismissDialog();
     }
 
     @Override

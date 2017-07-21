@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.kaoyan.MainActivity">
 
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        app:image_scale_type="fit_center"
+        app:indicator_width="20dp"
+        app:indicator_height="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"></com.youth.banner.Banner>
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"

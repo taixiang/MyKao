@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
@@ -79,12 +80,12 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
 
     @Override
     public void showLoading() {
-
+        new LoadingDialog(mActivity).showDialog();
     }
 
     @Override
     public void hideLoading() {
-
+//        LoadingDialog.dismissDialog();
     }
 
     @Override

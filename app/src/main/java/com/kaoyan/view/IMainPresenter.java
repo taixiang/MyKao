@@ -29,7 +29,7 @@ public class IMainPresenter implements IBasePresenter {
     }
 
     @Override
-    public void getData(boolean isRefresh) {
+    public void getData(final boolean isRefresh) {
 
         RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
             @Override
@@ -68,7 +68,9 @@ public class IMainPresenter implements IBasePresenter {
         getFind(page).doOnSubscribe(new Action0() {
             @Override
             public void call() {
-
+                if(!isRefresh){
+                    mView.showLoading();
+                }
             }
         }).doOnNext(new Action1<FindItem>() {
             @Override
@@ -79,7 +81,7 @@ public class IMainPresenter implements IBasePresenter {
                 subscribe(new Subscriber<FindItem>() {
                     @Override
                     public void onCompleted() {
-
+                        mView.hideLoading();
                     }
 
                     @Override

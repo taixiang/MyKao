@@ -1,20 +1,26 @@
 package com.kaoyan.fragment;
 
+import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kaoyan.R;
+import com.kaoyan.adapter.BannerAdapter;
 import com.kaoyan.adapter.TestAdapter2;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.adapter.TestAdapter;
 import com.kaoyan.base.BaseFragment;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
+import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.ToastUtils;
 import com.kaoyan.view.IMainPresenter;
 import com.kaoyan.view.IMainView;
@@ -22,9 +28,14 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -37,6 +48,8 @@ public class TestFragment extends BaseFragment implements IMainView{
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
+    @BindView(R.id.banner)
+    Banner banner;
     private IMainPresenter presenter;
     private TestAdapter adapter;
 //    private TestAdapter2 adapter2;
@@ -64,6 +77,42 @@ public class TestFragment extends BaseFragment implements IMainView{
                 presenter.getMoreData();
             }
         });
+        banner.setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+                ImgManager.loadImage(context, (String) path,imageView);
+            }
+        });
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                ToastUtils.showToast(mActivity,""+position);
+            }
+        });
+        banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        ArrayList<String> list = new ArrayList<>();
+        list.add("https://img.alicdn.com/bao/uploaded/i4/T1jr3BXhtfXXXXXXXX_!!0-item_pic.jpg");
+        list.add("https://img.alicdn.com/bao/uploaded/i4/T1jr3BXhtfXXXXXXXX_!!0-item_pic.jpg");
+        list.add("https://img.alicdn.com/bao/uploaded/i4/T1jr3BXhtfXXXXXXXX_!!0-item_pic.jpg");
+
+        banner.setImages(list);
+        banner.start();
 
     }
 
