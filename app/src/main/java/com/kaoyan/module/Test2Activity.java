@@ -9,17 +9,20 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kaoyan.R;
 import com.kaoyan.adapter.FindAdapter;
 import com.kaoyan.adapter.TestAdapter;
 import com.kaoyan.adapter.TestCustomAdapter;
+import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.base.BaseApplication;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.utils.CommonUtil;
+import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.NetUtil;
 import com.kaoyan.utils.ToastUtils;
 import com.kaoyan.view.IMainPresenter;
@@ -44,7 +47,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
     @BindView(R.id.listView)
     ListView recyclerView;
     @BindView(R.id.btn)
-    Button btn;
+    TextView btn;
 
     private IMainPresenter p = new IMainPresenter(this);
     private FindAdapter adapter;
@@ -59,7 +62,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     @OnClick(R.id.btn)
     void click(){
-        p.getData(false);
+//        p.login();
     }
 
     @Override
@@ -88,7 +91,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                p.getMoreData();
+//                p.getMoreData();
             }
         });
 
@@ -108,7 +111,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     @Override
     public void loadData(HomeMiddleItem middleItem) {
-
+        LogUtil.i(" middleItem "," 》》》》  "+middleItem.toString());
     }
 
     @Override
@@ -124,6 +127,11 @@ public class Test2Activity extends BaseActivity implements IMainView{
         }else {
             adapter2.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void login() {
+
     }
 
     private void stopRefreshAndLoad(){

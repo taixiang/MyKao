@@ -17,4 +17,7 @@ public interface IMainView extends IBaseView {
     void loadData(HomeMiddleItem middleItem);
 
     void loadNovel(FindItem item);
+
+    //登录
+    void login();
 }

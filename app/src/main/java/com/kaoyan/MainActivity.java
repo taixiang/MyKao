@@ -72,6 +72,11 @@ public class MainActivity extends BaseActivity implements IMainView{
     }
 
     @Override
+    public void login() {
+
+    }
+
+    @Override
     public void loadNoData() {
 
     }

@@ -80,7 +80,6 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
 
     @Override
     public void showLoading() {
-        new LoadingDialog(mActivity).showDialog();
     }
 
     @Override

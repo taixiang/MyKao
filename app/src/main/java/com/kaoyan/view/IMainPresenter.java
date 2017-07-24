@@ -7,6 +7,10 @@ import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.IBasePresenter;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
+import com.kaoyan.model.LoginBean;
+import com.kaoyan.model.LoginItem;
+import com.kaoyan.module.LoginPresenter;
+import com.kaoyan.utils.LogUtil;
 
 import java.util.Timer;
 
@@ -20,7 +24,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by tx on 2017/7/14.
  */
-public class IMainPresenter implements IBasePresenter {
+public class IMainPresenter implements LoginPresenter {
     private final IMainView mView;
     private int page = 1;
 
@@ -30,7 +34,6 @@ public class IMainPresenter implements IBasePresenter {
 
     @Override
     public void getData(final boolean isRefresh) {
-
         RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
             @Override
             public void call() {
@@ -86,7 +89,7 @@ public class IMainPresenter implements IBasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.showNetError();
                     }
 
                     @Override
@@ -100,7 +103,7 @@ public class IMainPresenter implements IBasePresenter {
     private Observable<FindItem> getFind(int page){
         return RetrofitService.msgApi.getFind(page).subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -128,5 +131,49 @@ public class IMainPresenter implements IBasePresenter {
                 });
     }
 
+    private void doSub(Observable ob){
 
+        LoginBean bean = new LoginBean("test","111111","4544eff735d7303c4fbc906e7502b8c6086e16e8");
+        RetrofitService.commonApi.login("test","111111","4544eff735d7303c4fbc906e7502b8c6086e16e8")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()).compose(mView.<LoginItem>bindToLife())
+                .subscribe(new Subscriber<LoginItem>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(LoginItem loginItem) {
+                        LogUtil.i("login success");
+                    }
+                });
+    }
+
+    @Override
+    public void login() {
+        RetrofitService.toSub(RetrofitService.commonApi.login("test", "111111", "4544eff735d7303c4fbc906e7502b8c6086e16e8"), new Subscriber<LoginItem>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(LoginItem loginItem) {
+                LogUtil.i("login success");
+            }
+        }, mView.<LoginItem>bindToLife());
+    }
 }

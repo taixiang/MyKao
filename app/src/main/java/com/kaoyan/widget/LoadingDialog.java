@@ -1,6 +1,7 @@
 package com.kaoyan.widget;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,30 +17,33 @@ import com.kaoyan.R;
 
 public class LoadingDialog {
     private static Dialog dialog;
-    public LoadingDialog(Context context){
+//    public  LoadingDialog(Context context){
+//        View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_loading,null);
+//        ImageView imageView = view.findViewById(R.id.img);
+//        Animation animation = AnimationUtils.loadAnimation(context,R.anim.loading_animation);
+//        imageView.startAnimation(animation);
+//        dialog = new Dialog(context,R.style.MyDialog);
+//        dialog.setContentView(view);
+//        dialog.show();
+//    }
+
+    public static void showDialog(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_loading,null);
         ImageView imageView = view.findViewById(R.id.img);
         Animation animation = AnimationUtils.loadAnimation(context,R.anim.loading_animation);
         imageView.startAnimation(animation);
-        if(null == dialog){
-            dialog = new Dialog(context);
-            dialog.setContentView(view);
-        }else if(!dialog.isShowing()){
-            dialog.show();
-        }
-
-    }
-
-    public void showDialog(){
-        if(null != dialog){
-            dialog.show();
-        }
+        dialog = new Dialog(context,R.style.MyDialog);
+        dialog.setContentView(view);
+        dialog.show();
+//        if(null != dialog){
+//            dialog.show();
+//        }
     }
 
     public static void dismissDialog(){
-        if(null != dialog){
+
             dialog.dismiss();
-        }
+
     }
 
 

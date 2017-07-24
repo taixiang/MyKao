@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.kaoyan.R;
 import com.kaoyan.utils.LogUtil;
+import com.kaoyan.widget.EmptyLayout;
 import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -25,6 +26,10 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends RxAppCompatActivity implements IBaseView{
     protected BaseActivity mActivity;
+
+    @Nullable
+    @BindView(R.id.llEmpty)
+    EmptyLayout emptyLayout;
 
     @Nullable
     @BindView(R.id.iv_back)
@@ -113,16 +118,25 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     @Override
     public void showLoading() {
-        new LoadingDialog(mActivity).showDialog();
+        if(emptyLayout != null){
+            emptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        }
+//        LoadingDialog.showDialog(this);
     }
 
     @Override
     public void hideLoading() {
+        if(emptyLayout != null){
+            emptyLayout.hide();
+        }
 //        LoadingDialog.dismissDialog();
     }
 
     @Override
     public void showNetError() {
+        if (emptyLayout != null) {
+            emptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
+        }
         LogUtil.i(" shownetError  baseactivity ");
     }
 

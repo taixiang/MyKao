@@ -13,8 +13,7 @@ import rx.Observable;
  * 所有接口地址
  */
 public interface IApi {
-    @GET("API/Default.ashx?action=default_middle")
-    Observable<HomeMiddleItem> getMiddle();
+
 
     //pro.ashx?action=novel&page=%s
     @GET("API/pro.ashx?action=novel")

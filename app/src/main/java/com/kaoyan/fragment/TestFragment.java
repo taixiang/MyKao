@@ -150,6 +150,11 @@ public class TestFragment extends BaseFragment implements IMainView{
     }
 
     @Override
+    public void login() {
+
+    }
+
+    @Override
     public void showNetError() {
         super.showNetError();
         refreshLayout.finishLoadmore();

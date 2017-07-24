@@ -10,11 +10,13 @@ import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.NovelItem;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.NetUtil;
+import com.trello.rxlifecycle.LifecycleTransformer;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -31,6 +33,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -46,7 +49,9 @@ public class RetrofitService {
     private static final String CACHE_CONTROL_CACHE = "only-if-cached, max-stale=" + CACHE_STALE_SEC;
 
     private static final String BASE_URL = "http://m.iisbn.com/";
+    private static final String URL = "http://www.iisbn.com/";
     public static IApi msgApi;
+    public static CommonApi commonApi;
 
     private RetrofitService() {
         throw new AssertionError();
@@ -73,6 +78,13 @@ public class RetrofitService {
                 .baseUrl(BASE_URL)
                 .build();
         msgApi = retrofit.create(IApi.class);
+        retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(URL)
+                .build();
+        commonApi = retrofit.create(CommonApi.class);
     }
 
     private static HttpLoggingInterceptor.Logger loggerInterceptor = new HttpLoggingInterceptor.Logger() {
@@ -81,6 +93,13 @@ public class RetrofitService {
             LogUtil.i(" 》》》》  "," message == "+message+"");
         }
     };
+
+    public static <T> void toSub(Observable<T> ob,Subscriber<T> subscriber,LifecycleTransformer<T> l){
+        ob.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()).compose(l).subscribe(subscriber);
+    }
 
     /**
      * 打印返回的json数据拦截器
@@ -139,23 +158,23 @@ public class RetrofitService {
 
 
     public static Observable<HomeMiddleItem> getMiddleItem(){
-        return msgApi.getMiddle().subscribeOn(Schedulers.io())
+        return commonApi.getMiddle().subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public static Observable<NovelItem> getNovel(int page){
         return msgApi.getNovel(page).subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public static Observable<FindItem> getFind(int page){
         return msgApi.getFind(page).subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
