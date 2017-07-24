@@ -151,6 +151,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
     }
 
 
+    
+
+
     /**
      * 添加 Fragment
      *
