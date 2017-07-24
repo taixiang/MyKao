@@ -3,7 +3,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/layout_titlebar"/>
+    <include android:visibility="gone" layout="@layout/layout_titlebar"/>
+
+    <LinearLayout
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/search"
+            android:text="搜索"
+            android:background="#fff"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

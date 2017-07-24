@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.SharedPreferencesUtil;
+import com.kaoyan.utils.ToastUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,12 +52,13 @@ public class ExampleInstrumentedTest
         appContext.startActivity(intent);
 //        onView(withId(R.id.btn)).check(matches(isDisplayed()));
         onView(withId(R.id.btn)).perform(click());
+
     }
 
     @Test
     public void getTest(){
         SharedPreferencesUtil.getInt(appContext,"TEST",0);
-
+        ToastUtils.showToast(appContext,"11111");
     }
 
 }

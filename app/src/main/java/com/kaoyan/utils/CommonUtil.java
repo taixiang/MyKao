@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.DisplayMetrics;
+
+import com.kaoyan.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +75,6 @@ public class CommonUtil {
 
     /**
      * 手机号验证
-     *
      * @param phoneNo
      * @return 是否是手机号
      */
@@ -81,6 +83,19 @@ public class CommonUtil {
                 .compile("^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$");
         Matcher m = p.matcher(phoneNo);
         return m.matches();
+    }
+
+    /**
+     * 获取屏幕宽高
+     * @param context
+     * @return
+     */
+    public static int[] getWidthAndHeight(Context context){
+        int[] wh = new int[2];
+        DisplayMetrics metric = context.getResources().getDisplayMetrics();
+        wh[0] = metric.widthPixels;
+        wh[1] = metric.heightPixels;
+        return wh;
     }
 
 }

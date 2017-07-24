@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.Test2Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".module.TestActivity3" />
     </application>
 
 </manifest>

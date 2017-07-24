@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,7 +22,9 @@ import com.kaoyan.adapter.TestAdapter;
 import com.kaoyan.base.BaseFragment;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
+import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.ImgManager;
+import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.ToastUtils;
 import com.kaoyan.view.IMainPresenter;
 import com.kaoyan.view.IMainView;
@@ -62,6 +66,11 @@ public class TestFragment extends BaseFragment implements IMainView{
 
     @Override
     protected void init() {
+
+        LogUtil.i(" widthheigth == 》》》》  "+CommonUtil.getWidthAndHeight(mActivity)[0]+"   "+CommonUtil.getWidthAndHeight(mActivity)[1] + "    " +CommonUtil.getWidthAndHeight(mActivity)[0]*2/5);
+
+        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,CommonUtil.getWidthAndHeight(mActivity)[0]*2/5);
+        banner.setLayoutParams(ll);
         presenter = new IMainPresenter(this);
         presenter.getData(false);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {

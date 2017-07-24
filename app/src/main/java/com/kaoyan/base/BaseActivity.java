@@ -150,6 +150,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     }
 
+    @Override
+    public void loadNoData() {
+
+    }
 
     
 
