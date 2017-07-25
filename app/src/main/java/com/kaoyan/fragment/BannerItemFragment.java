@@ -1,16 +1,23 @@
 package com.kaoyan.fragment;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;
+import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.ImgManager;
+import com.kaoyan.utils.LogUtil;
 
 import butterknife.BindView;
 
@@ -39,6 +46,8 @@ public class BannerItemFragment extends BaseFragment {
 
     @BindView(R.id.ivBanner)
     ImageView ivBanner;
+    @BindView(R.id.container)
+    LinearLayout container;
 
     @Override
     protected int attachLayoutRes() {
@@ -47,8 +56,19 @@ public class BannerItemFragment extends BaseFragment {
 
     @Override
     protected void init() {
-        String url = getArguments().getString("banner_url");
-        ImgManager.loadImage(mActivity,url,ivBanner);
+//        String url = getArguments().getString("banner_url");
+//        ImgManager.loadImage(mActivity,url,ivBanner);
+        mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        mIsMulti = false;
+        LogUtil.i(" bannerItem  init ");
+//        Rect outRect = new Rect();
+//        mActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect);
+//        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) container.getLayoutParams();
+//        params.height = outRect.bottom - outRect.top;
+
+//        LogUtil.i("  params  height=  "+params.height+"  window height"+CommonUtil.getWidthAndHeight(mActivity)[1]);
+
     }
 
 //    @Override

@@ -5,23 +5,47 @@
 
     <include android:visibility="gone" layout="@layout/layout_titlebar"/>
 
-    <LinearLayout
-        android:background="@color/colorAccent"
-        android:orientation="horizontal"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="150dp"
+        android:background="#0096FF"
+        android:padding="10dp">
 
         <TextView
-            android:id="@+id/search"
-            android:text="搜索"
-            android:background="#fff"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="16sp" />
 
-    </LinearLayout>
+        <EditText
+            android:hint="搜索"
+            android:id="@+id/tv_search_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#fff"
+            android:editable="false"
+            android:padding="10dp" />
+
+
+        <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="搜索商家、商品名称" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="#fff" />
 
     <RelativeLayout
         android:layout_width="match_parent"

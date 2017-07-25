@@ -48,8 +48,8 @@ public class Test2Activity extends BaseActivity implements IMainView{
     ListView recyclerView;
     @BindView(R.id.btn)
     TextView btn;
-    @BindView(R.id.search)
-    TextView search;
+    @BindView(R.id.tv_search_bg)
+    EditText search;
 
     private IMainPresenter p = new IMainPresenter(this);
     private FindAdapter adapter;
@@ -78,11 +78,12 @@ public class Test2Activity extends BaseActivity implements IMainView{
         return R.layout.activity_test2;
     }
 
-    @OnClick(R.id.search)
+    @OnClick(R.id.tv_search_bg)
     void search(){
         Intent intent = new Intent(this,TestActivity3.class);
         int location[] = new int[2];
         search.getLocationOnScreen(location);
+        LogUtil.i("location  x= "+location[0]+"  y= "+location[1]);
         intent.putExtra("x",location[0]);
         intent.putExtra("y",location[1]);
         startActivity(intent);

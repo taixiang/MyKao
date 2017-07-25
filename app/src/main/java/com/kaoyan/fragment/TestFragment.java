@@ -66,7 +66,7 @@ public class TestFragment extends BaseFragment implements IMainView{
 
     @Override
     protected void init() {
-
+//        mIsMulti = false;
         LogUtil.i(" widthheigth == 》》》》  "+CommonUtil.getWidthAndHeight(mActivity)[0]+"   "+CommonUtil.getWidthAndHeight(mActivity)[1] + "    " +CommonUtil.getWidthAndHeight(mActivity)[0]*2/5);
 
         LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,CommonUtil.getWidthAndHeight(mActivity)[0]*2/5);
@@ -124,6 +124,15 @@ public class TestFragment extends BaseFragment implements IMainView{
         banner.start();
 
     }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+
+
+
+        LogUtil.i("baseFragment 》》》》》 test  super.setUserVisibleHint   after");
+
+    }
 
     @Override
     public void loadData(HomeMiddleItem middleItem) {
@@ -151,6 +160,7 @@ public class TestFragment extends BaseFragment implements IMainView{
                     Test2Activity.actTo2(mActivity);
                 }
             });
+
             recyclerView.setAdapter(adapter);
         }else {
             Log.i("》》》》》  "," adapter notifyData");

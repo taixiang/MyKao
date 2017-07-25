@@ -1,26 +1,41 @@
 package com.kaoyan;
 
+import android.graphics.Rect;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.kaoyan.base.BaseActivity;
+import com.kaoyan.fragment.BannerItemFragment;
 import com.kaoyan.fragment.TestFragment;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
+import com.kaoyan.utils.CommonUtil;
+import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
+
+import butterknife.BindView;
 
 
 public class MainActivity extends BaseActivity implements IMainView{
     FragmentTabHost tabHost;
 
+    @BindView(android.R.id.tabs)
+    TabWidget tabWidget;
+
+
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {TestFragment.class,TestFragment.class,TestFragment.class,TestFragment.class};
+    private Class fragmentArray[] = {TestFragment.class,BannerItemFragment.class,TestFragment.class,TestFragment.class};
     //定义数组来存放按钮图片
-    private int mImageViewArray[] = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
+    private int mImageViewArray[] = {R.drawable.selector_tab_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};
 
     //Tab选项卡的文字
@@ -33,7 +48,14 @@ public class MainActivity extends BaseActivity implements IMainView{
 
     @Override
     protected void init() {
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         setUpFragmentTabHost();
+//        Rect outRect = new Rect();
+//        getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect);
+//        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) container.getLayoutParams();
+//        params.height = outRect.bottom - outRect.top;
+//        LogUtil.i("  params  height=  "+params.height+"  window height"+ CommonUtil.getWidthAndHeight(mActivity)[1]);
     }
 
     private void setUpFragmentTabHost(){

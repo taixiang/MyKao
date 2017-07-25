@@ -36,7 +36,7 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
 
     //缓存Fragment view
     private View mRootView;
-    private boolean mIsMulti = false;
+    protected boolean mIsMulti = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

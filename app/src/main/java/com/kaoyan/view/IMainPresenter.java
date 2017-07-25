@@ -12,6 +12,7 @@ import com.kaoyan.model.LoginItem;
 import com.kaoyan.module.LoginPresenter;
 import com.kaoyan.utils.LogUtil;
 
+import java.util.List;
 import java.util.Timer;
 
 import rx.Observable;
@@ -19,6 +20,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -34,6 +36,9 @@ public class IMainPresenter implements LoginPresenter {
 
     @Override
     public void getData(final boolean isRefresh) {
+
+
+
         RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
             @Override
             public void call() {
@@ -176,4 +181,30 @@ public class IMainPresenter implements LoginPresenter {
             }
         }, mView.<LoginItem>bindToLife());
     }
+
+    private void getData(){
+        getFind(page).flatMap(new Func1<FindItem, Observable<FindItem.Find>>() {
+            @Override
+            public Observable<FindItem.Find> call(FindItem findItem) {
+                return Observable.from(findItem.pros);
+            }
+        }).compose(mView.<FindItem.Find>bindToLife()).subscribe(new Subscriber<FindItem.Find>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(FindItem.Find find) {
+                LogUtil.i(" flatmap  find === 》》》》  "+find.pro_name);
+            }
+        });
+    }
+
+
 }

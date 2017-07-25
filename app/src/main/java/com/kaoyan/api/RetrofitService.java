@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.kaoyan.base.BaseApplication;
+import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.NovelItem;
@@ -35,6 +36,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -98,7 +102,24 @@ public class RetrofitService {
         ob.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
 //                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread()).compose(l).subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(l).subscribe(subscriber);
+    }
+
+
+    /**
+     * 带loading
+     * @param ob
+     * @param subscriber
+     * @param l
+     * @param action0
+     * @param <T>
+     */
+    public static <T> void doSubscribeWithLoading(Observable<T> ob, Subscriber<T> subscriber, LifecycleTransformer<T> l, Action0 action0){
+        ob.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()).doOnSubscribe(action0).compose(l).subscribe(subscriber);
     }
 
     /**

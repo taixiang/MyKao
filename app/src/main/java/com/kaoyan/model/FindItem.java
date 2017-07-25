@@ -16,9 +16,14 @@ import java.util.List;
  image_url: "https://img.ali
  */
 
-public class FindItem implements Parcelable {
-    public String result;
+public class FindItem extends BaseItem {
+
     public List<Find> pros;
+
+    protected FindItem(Parcel in) {
+        super(in);
+    }
+
     public static class Find implements Parcelable {
         public String user_name;
         public String university;
@@ -80,10 +85,7 @@ public class FindItem implements Parcelable {
         }
     }
 
-    protected FindItem(Parcel in) {
-        result = in.readString();
-        pros = in.createTypedArrayList(Find.CREATOR);
-    }
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
