@@ -3,6 +3,7 @@ package com.kaoyan.api;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.LoginItem;
 
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -23,5 +24,8 @@ public interface CommonApi {
     Observable<LoginItem> login(@Field("user_name")String name,
                                 @Field("passwords")String password,
                                 @Field("device_token")String token);
+
+    @GET("API/Default.ashx?action=default_middle")
+    Call<HomeMiddleItem> getmiddleItem();
 
 }

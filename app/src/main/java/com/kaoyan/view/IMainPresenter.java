@@ -39,35 +39,35 @@ public class IMainPresenter implements LoginPresenter {
 
 
 
-        RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
-            @Override
-            public void call() {
-
-            }
-        }).doOnNext(new Action1<HomeMiddleItem>() {
-            @Override
-            public void call(HomeMiddleItem middleItem) {
-
-            }
-        }).compose(mView.<HomeMiddleItem>bindToLife()).
-                subscribe(new Subscriber<HomeMiddleItem>() {
-            @Override
-            public void onCompleted() {
-                Log.i("》》》》  "," item middle === complete");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.i("》》》》  ","middle onerror == "+e.toString());
-            }
-
-            @Override
-            public void onNext(HomeMiddleItem homeMiddleItem) {
-                mView.loadData(homeMiddleItem);
-//                Log.i("》》》》   "," middle thread  "+Thread.currentThread());
-                Log.i("》》》》  "," item middle ===  onnext"+homeMiddleItem.toString());
-            }
-        });
+//        RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
+//            @Override
+//            public void call() {
+//
+//            }
+//        }).doOnNext(new Action1<HomeMiddleItem>() {
+//            @Override
+//            public void call(HomeMiddleItem middleItem) {
+//
+//            }
+//        }).compose(mView.<HomeMiddleItem>bindToLife()).
+//                subscribe(new Subscriber<HomeMiddleItem>() {
+//            @Override
+//            public void onCompleted() {
+//                Log.i("》》》》  "," item middle === complete");
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Log.i("》》》》  ","middle onerror == "+e.toString());
+//            }
+//
+//            @Override
+//            public void onNext(HomeMiddleItem homeMiddleItem) {
+//                mView.loadData(homeMiddleItem);
+////                Log.i("》》》》   "," middle thread  "+Thread.currentThread());
+//                Log.i("》》》》  "," item middle ===  onnext"+homeMiddleItem.toString());
+//            }
+//        });
 
         if(isRefresh){
             page = 1;

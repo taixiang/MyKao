@@ -20,7 +20,7 @@ public class GreenDaoManager {
     private DaoSession daoSession;
 
     private GreenDaoManager(Context context){
-        DbOpenHelper helper = new DbOpenHelper(context,DB_NAME);
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context,DB_NAME);
         Database database = helper.getWritableDb();
         daoMaster = new DaoMaster(database);
         daoSession = daoMaster.newSession();
@@ -35,8 +35,8 @@ public class GreenDaoManager {
     public DaoMaster getMaster(){
         return daoMaster;
     }
-    public DaoSession getDaosession(){
 
+    public DaoSession getDaosession(){
         return daoSession;
     }
 

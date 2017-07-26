@@ -41,7 +41,9 @@ public class ExampleInstrumentedTest
 //        assertEquals("com.kaoyanvip", appContext.getPackageName());
 //        onView(withId(R.id.btn)).perform(click())
 //                .check(matches(isDisplayed()));
-        SharedPreferencesUtil.putString(appContext,"TEST","test");
+        SharedPreferencesUtil.contains(appContext,"TEST");
+//        Log.i("》》》》  "," t === "+t);
+//        SharedPreferencesUtil.clear(appContext);
     }
 
     @Test
@@ -57,7 +59,6 @@ public class ExampleInstrumentedTest
 
     @Test
     public void getTest(){
-        SharedPreferencesUtil.getInt(appContext,"TEST",0);
         ToastUtils.showToast(appContext,"11111");
     }
 

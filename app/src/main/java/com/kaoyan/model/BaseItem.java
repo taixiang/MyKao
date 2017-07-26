@@ -7,9 +7,10 @@ import android.os.Parcelable;
  * Created by tx on 2017/7/25.
  */
 
-public class BaseItem<T> implements Parcelable {
+public class BaseItem<T>  implements Parcelable{
     public String result;
     public T data;
+
 
     protected BaseItem(Parcel in) {
         result = in.readString();

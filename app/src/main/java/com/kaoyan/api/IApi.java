@@ -4,6 +4,7 @@ import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.NovelItem;
 
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -22,5 +23,7 @@ public interface IApi {
     @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
     Observable<FindItem> getFind(@Query("pageIndex")int page);
 
+    @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
+    Call<FindItem> getFindItem(@Query("pageIndex")int page);
 
 }

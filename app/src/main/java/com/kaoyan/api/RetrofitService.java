@@ -72,7 +72,7 @@ public class RetrofitService {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
                 .addInterceptor(interceptor)
-
+                .addInterceptor(tokenInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
@@ -99,6 +99,9 @@ public class RetrofitService {
     };
 
     public static <T> void toSub(Observable<T> ob,Subscriber<T> subscriber,LifecycleTransformer<T> l){
+
+
+
         ob.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
 //                .subscribeOn(AndroidSchedulers.mainThread())
@@ -175,6 +178,64 @@ public class RetrofitService {
             }
         }
     };
+    public static int page = 1;
+    private static final Interceptor tokenInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            LogUtil.i("response.code=" + response.code());
+
+            if(page == 1){
+                page++;
+                FindItem findItem =  msgApi.getFindItem(2).execute().body();
+                LogUtil.i("response  page = "+page);
+                Request newRequest =  request.newBuilder().build();
+                response.close();
+                return chain.proceed(newRequest);
+            }
+
+
+//            HomeMiddleItem middleItem =  commonApi.getmiddleItem().execute().body();
+//            LogUtil.i("response.code=  middleItem  " +middleItem);
+
+
+
+            return response;
+        }
+    };
+
+    private static void getData(){
+        RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
+            @Override
+            public void call() {
+
+            }
+        }).doOnNext(new Action1<HomeMiddleItem>() {
+            @Override
+            public void call(HomeMiddleItem middleItem) {
+
+            }
+        }).
+                subscribe(new Subscriber<HomeMiddleItem>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i("》》》》  "," response item middle === complete");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("》》》》  "," response middle onerror == "+e.toString());
+                    }
+
+                    @Override
+                    public void onNext(HomeMiddleItem homeMiddleItem) {
+
+//                Log.i("》》》》   "," middle thread  "+Thread.currentThread());
+                        Log.i("》》》》  ","  response  item middle ===  onnext"+homeMiddleItem.toString());
+                    }
+                });
+    }
 
 
 

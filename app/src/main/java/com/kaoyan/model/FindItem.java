@@ -24,7 +24,7 @@ public class FindItem extends BaseItem {
         super(in);
     }
 
-    public static class Find implements Parcelable {
+    public static class Find extends BaseItem {
         public String user_name;
         public String university;
         public String pro_id;
@@ -34,13 +34,7 @@ public class FindItem extends BaseItem {
         public String image_url;
 
         protected Find(Parcel in) {
-            user_name = in.readString();
-            university = in.readString();
-            pro_id = in.readString();
-            ISBN = in.readString();
-            pro_name = in.readString();
-            price_sell = in.readString();
-            image_url = in.readString();
+            super(in);
         }
 
         @Override
@@ -55,60 +49,7 @@ public class FindItem extends BaseItem {
                     ", image_url='" + image_url + '\'' +
                     '}';
         }
-
-        public static final Parcelable.Creator<Find> CREATOR = new Creator<Find>() {
-            @Override
-            public Find createFromParcel(Parcel in) {
-                return new Find(in);
-            }
-
-            @Override
-            public Find[] newArray(int size) {
-                return new Find[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(user_name);
-            dest.writeString(university);
-            dest.writeString(pro_id);
-            dest.writeString(ISBN);
-            dest.writeString(pro_name);
-            dest.writeString(price_sell);
-            dest.writeString(image_url);
-        }
     }
-
-
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(result);
-        dest.writeTypedList(pros);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<FindItem> CREATOR = new Creator<FindItem>() {
-        @Override
-        public FindItem createFromParcel(Parcel in) {
-            return new FindItem(in);
-        }
-
-        @Override
-        public FindItem[] newArray(int size) {
-            return new FindItem[size];
-        }
-    };
 
     @Override
     public String toString() {

@@ -20,8 +20,6 @@ import org.greenrobot.greendao.database.Database;
  */
 public class BaseApplication extends Application {
     private static BaseApplication app ;
-    private static String DB_NAME = "yantuvip_db";
-
 
     @Override
     public void onCreate() {
@@ -33,12 +31,6 @@ public class BaseApplication extends Application {
         }
         RetrofitService.init(this);
         GreenDaoManager.getInstance(this);
-    }
-
-    private void initDatabase(Context context){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context,DB_NAME);
-        Database database = helper.getWritableDb();
-        DaoSession daoSession = new DaoMaster(database).newSession();
     }
 
     public static BaseApplication getInstance() {
