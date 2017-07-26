@@ -15,11 +15,18 @@ import android.widget.RelativeLayout;
 
 import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;
+
+import com.kaoyan.database.User;
+import com.kaoyan.database.UserDao;
 import com.kaoyan.utils.CommonUtil;
+import com.kaoyan.utils.GreenDaoManager;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by tx on 2017/7/21.
@@ -34,7 +41,7 @@ public class BannerItemFragment extends BaseFragment {
 //    }
 
     private String imgUrl;
-
+    private UserDao userDao;
 
     public static BannerItemFragment newInstance(String url) {
         BannerItemFragment fragment = new BannerItemFragment();
@@ -48,10 +55,52 @@ public class BannerItemFragment extends BaseFragment {
     ImageView ivBanner;
     @BindView(R.id.container)
     LinearLayout container;
+    private int i;
 
     @Override
     protected int attachLayoutRes() {
         return R.layout.fragment_banner;
+    }
+
+    @OnClick(R.id.insert)
+    void inser(){
+        i++;
+        User user = new User(null,i+""," "+i);
+        userDao.insert(user);
+        LogUtil.i("userList ===  insert ");
+    }
+
+    @OnClick(R.id.delete)
+    void delete(){
+        List<User> user = userDao.queryBuilder().where(UserDao.Properties.Id.eq("1")).build().list();
+        if(user != null){
+            userDao.delete(user.get(0));
+            LogUtil.i("userList ===  delete ");
+        }
+    }
+
+    @OnClick(R.id.update)
+    void update(){
+        List<User> user = userDao.queryBuilder().where(UserDao.Properties.Name.eq("2")).build().list();
+        if(user != null){
+            user.get(0).setName("33333");
+            userDao.update(user.get(0));
+            LogUtil.i("userList ===  update ");
+        }
+
+    }
+
+    @OnClick(R.id.find)
+    void find(){
+        List<User> list = userDao.queryBuilder().orderDesc(UserDao.Properties.Id).list();
+        LogUtil.i("userList === "+list.toString());
+
+        list.get(0).setName("4444444");
+        userDao.update(list.get(0));
+//        GreenDaoManager.getInstance(mActivity).getDaosession().clear();
+        List<User> list2 = userDao.queryBuilder().orderDesc(UserDao.Properties.Id).list();
+        LogUtil.i("userList2 === "+list.toString());
+
     }
 
     @Override
@@ -62,6 +111,8 @@ public class BannerItemFragment extends BaseFragment {
 
         mIsMulti = false;
         LogUtil.i(" bannerItem  init ");
+        userDao = GreenDaoManager.getInstance(mActivity).getDaosession().getUserDao();
+
 //        Rect outRect = new Rect();
 //        mActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect);
 //        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) container.getLayoutParams();

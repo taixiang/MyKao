@@ -2,18 +2,26 @@ package com.kaoyan.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.kaoyan.BuildConfig;
 import com.kaoyan.api.RetrofitService;
+import com.kaoyan.database.DaoMaster;
+import com.kaoyan.database.DaoSession;
+import com.kaoyan.utils.GreenDaoManager;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.ToastUtils;
 import com.squareup.leakcanary.LeakCanary;
+
+import org.greenrobot.greendao.database.Database;
 
 /**
  * Created by tx on 2017/7/17.
  */
 public class BaseApplication extends Application {
     private static BaseApplication app ;
+    private static String DB_NAME = "yantuvip_db";
+
 
     @Override
     public void onCreate() {
@@ -24,7 +32,13 @@ public class BaseApplication extends Application {
             LogUtil.isDebug = true;
         }
         RetrofitService.init(this);
+        GreenDaoManager.getInstance(this);
+    }
 
+    private void initDatabase(Context context){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context,DB_NAME);
+        Database database = helper.getWritableDb();
+        DaoSession daoSession = new DaoMaster(database).newSession();
     }
 
     public static BaseApplication getInstance() {
