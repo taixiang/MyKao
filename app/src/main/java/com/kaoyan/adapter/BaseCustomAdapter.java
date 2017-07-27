@@ -30,7 +30,7 @@ public abstract class BaseCustomAdapter<T> extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mDatas !=null ? mDatas.size():0; //mDatas !=null ? mDatas.size():0
+        return mDatas !=null ? mDatas.size():0;
     }
 
     @Override

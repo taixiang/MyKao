@@ -3,8 +3,11 @@ package com.kaoyan.view;
 import android.os.Handler;
 import android.util.Log;
 
+import com.kaoyan.api.IApi;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.IBasePresenter;
+import com.kaoyan.model.BannerItem;
+import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.LoginBean;
@@ -72,94 +75,74 @@ public class IMainPresenter implements LoginPresenter {
         if(isRefresh){
             page = 1;
         }
-
-        getFind(page).doOnSubscribe(new Action0() {
-            @Override
-            public void call() {
-                if(!isRefresh){
-                    mView.showLoading();
-                }
-            }
-        }).doOnNext(new Action1<FindItem>() {
-            @Override
-            public void call(FindItem middleItem) {
-
-            }
-        }).compose(mView.<FindItem>bindToLife()).
-                subscribe(new Subscriber<FindItem>() {
-                    @Override
-                    public void onCompleted() {
-                        mView.hideLoading();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mView.showNetError();
-                    }
-
-                    @Override
-                    public void onNext(final FindItem homeMiddleItem) {
-                        Log.i("》》》》》   "," finditem "+homeMiddleItem.toString());
-                        mView.loadNovel(homeMiddleItem);
-                        page++;
-                    }
-                });
+        LogUtil.i(" present  getData ");
+        doGetFind();
+//        getFind(page).doOnSubscribe(new Action0() {
+//            @Override
+//            public void call() {
+//                if(!isRefresh){
+//                    mView.showLoading();
+//                }
+//            }
+//        }).doOnNext(new Action1<FindItem>() {
+//            @Override
+//            public void call(FindItem middleItem) {
+//
+//            }
+//        }).compose(mView.<FindItem>bindToLife()).
+//                subscribe(new Subscriber<FindItem>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        mView.hideLoading();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mView.showNetError();
+//                    }
+//
+//                    @Override
+//                    public void onNext(final FindItem homeMiddleItem) {
+//                        Log.i("》》》》》   "," finditem "+homeMiddleItem.toString());
+//                        mView.loadNovel(homeMiddleItem);
+//                        page++;
+//                    }
+//                });
     }
-    private Observable<FindItem> getFind(int page){
-        return RetrofitService.msgApi.getFind(page).subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
+//    private Observable<FindItem> getFind(int page){
+//        return RetrofitService.msgApi.getFind(page).subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+////                .subscribeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
 
     @Override
     public void getMoreData() {
-        getFind(page).compose(mView.<FindItem>bindToLife()).
-                subscribe(new Subscriber<FindItem>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i("》》》》  ","novel more item === complete");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i("》》》》  ","find more item === error ");
-                        mView.showNetError();
-                    }
-
-                    @Override
-                    public void onNext(FindItem homeMiddleItem) {
-                        Log.i("》》》》  ","find more item === next  ");
-                        mView.loadNovel(homeMiddleItem);
-                        page++;
-                    }
-                });
+//        getFind(page).compose(mView.<FindItem>bindToLife()).
+//                subscribe(new Subscriber<FindItem>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        Log.i("》》》》  ","novel more item === complete");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.i("》》》》  ","find more item === error ");
+//                        mView.showNetError();
+//                    }
+//
+//                    @Override
+//                    public void onNext(FindItem homeMiddleItem) {
+//                        Log.i("》》》》  ","find more item === next  ");
+//                        mView.loadNovel(homeMiddleItem);
+//                        page++;
+//                    }
+//                });
     }
 
     private void doSub(Observable ob){
 
         LoginBean bean = new LoginBean("test","111111","4544eff735d7303c4fbc906e7502b8c6086e16e8");
-        RetrofitService.commonApi.login("test","111111","4544eff735d7303c4fbc906e7502b8c6086e16e8")
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread()).compose(mView.<LoginItem>bindToLife())
-                .subscribe(new Subscriber<LoginItem>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(LoginItem loginItem) {
-                        LogUtil.i("login success");
-                    }
-                });
     }
 
     @Override
@@ -176,35 +159,83 @@ public class IMainPresenter implements LoginPresenter {
             }
 
             @Override
-            public void onNext(LoginItem loginItem) {
-                LogUtil.i("login success");
+            public void onNext(LoginItem loginItemBaseItem) {
+
             }
         }, mView.<LoginItem>bindToLife());
     }
 
+    @Override
+    public void loadBanner() {
+        RetrofitService.commonApi.getBanner().subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(mView.<BannerItem>bindToLife())
+                .subscribe(new Subscriber<BannerItem>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(BannerItem bannerItem) {
+                        mView.loadBanner(bannerItem);
+                    }
+                });
+    }
+
     private void getData(){
-        getFind(page).flatMap(new Func1<FindItem, Observable<FindItem.Find>>() {
-            @Override
-            public Observable<FindItem.Find> call(FindItem findItem) {
-                return Observable.from(findItem.pros);
-            }
-        }).compose(mView.<FindItem.Find>bindToLife()).subscribe(new Subscriber<FindItem.Find>() {
+//        getFind(page).flatMap(new Func1<FindItem, Observable<FindItem.Find>>() {
+//            @Override
+//            public Observable<FindItem.Find> call(FindItem findItem) {
+//                return Observable.from(findItem.pros);
+//            }
+//        }).compose(mView.<FindItem.Find>bindToLife()).subscribe(new Subscriber<FindItem.Find>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(FindItem.Find find) {
+//                LogUtil.i(" flatmap  find === 》》》》  "+find.pro_name);
+//            }
+//        });
+    }
+
+
+
+    private void doGetFind(){
+
+        RetrofitService.toSub(RetrofitService.msgApi.getFind(page), new Subscriber<List<FindItem.Find>>() {
             @Override
             public void onCompleted() {
-
+                LogUtil.i("  findItem == onCompleted ");
             }
 
             @Override
             public void onError(Throwable e) {
-
+                LogUtil.i("  findItem ==  Throwable"+e.toString());
             }
 
             @Override
-            public void onNext(FindItem.Find find) {
-                LogUtil.i(" flatmap  find === 》》》》  "+find.pro_name);
-            }
-        });
-    }
+            public void onNext(List<FindItem.Find> findItem) {
+                LogUtil.i("  threadname onnext == "+Thread.currentThread().getName());
 
+                LogUtil.i("  findItem ==  "+findItem.toString());
+                mView.loadFindList(findItem);
+            }
+        },mView.<List<FindItem.Find>>bindToLife());
+    }
 
 }

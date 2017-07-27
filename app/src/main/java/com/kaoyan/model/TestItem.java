@@ -11,7 +11,5 @@ public class TestItem extends BaseItem {
     private String id;
     private String name;
 
-    protected TestItem(Parcel in) {
-        super(in);
-    }
+
 }

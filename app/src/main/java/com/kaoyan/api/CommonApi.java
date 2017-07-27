@@ -1,5 +1,7 @@
 package com.kaoyan.api;
 
+import com.kaoyan.model.BannerItem;
+import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.LoginItem;
 
@@ -21,11 +23,14 @@ public interface CommonApi {
 
     @FormUrlEncoded
     @POST("API/users.ashx?action=check_user")
-    Observable<LoginItem> login(@Field("user_name")String name,
-                                @Field("passwords")String password,
-                                @Field("device_token")String token);
+    Observable<BaseItem<LoginItem>> login(@Field("user_name")String name,
+                               @Field("passwords")String password,
+                               @Field("device_token")String token);
 
     @GET("API/Default.ashx?action=default_middle")
     Call<HomeMiddleItem> getmiddleItem();
+
+    @GET("API/Default.ashx?action=news_side")
+    Observable<BannerItem> getBanner();
 
 }

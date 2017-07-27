@@ -72,7 +72,7 @@ public class RetrofitService {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
                 .addInterceptor(interceptor)
-                .addInterceptor(tokenInterceptor)
+//                .addInterceptor(tokenInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
@@ -98,17 +98,48 @@ public class RetrofitService {
         }
     };
 
-    public static <T> void toSub(Observable<T> ob,Subscriber<T> subscriber,LifecycleTransformer<T> l){
-
-
-
+    public static <T> void toSub(Observable<BaseItem<T>> ob,Subscriber<T> subscriber,LifecycleTransformer<T> l){
         ob.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
 //                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(l).subscribe(subscriber);
+                .map(new ResultFilter<T>()).doOnSubscribe(new Action0() {
+            @Override
+            public void call() {
+                LogUtil.i("  threadname == "+Thread.currentThread().getName());
+            }
+        }).compose(l).subscribe(subscriber);
+
     }
 
+    public static <T> void mergeSub(Subscriber<T> subscriber,LifecycleTransformer<T> l,Observable<BaseItem<T>>... tt){
+
+        Observable.merge(tt).subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new ResultFilter<T>()).doOnSubscribe(new Action0() {
+            @Override
+            public void call() {
+                LogUtil.i("  threadname == "+Thread.currentThread().getName());
+            }
+        }).compose(l).subscribe(subscriber);
+    }
+
+    private static class ResultFilter<T> implements Func1<BaseItem<T>, T> {
+        @Override
+        public T call(BaseItem<T> tHttpBean) {
+//            if(tHttpBean.result.equals("true")){
+//                throw new NullPointerException();
+//            }
+            LogUtil.i(" httpBean ==   "+tHttpBean);
+
+            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
+
+
+            return tHttpBean.pros;
+        }
+    }
 
     /**
      * 带loading
@@ -133,7 +164,7 @@ public class RetrofitService {
         public Response intercept(@NonNull Chain chain) throws IOException {
             final Request request = chain.request();
             Buffer requestBuffer = new Buffer();
-            if (request.body() != null ) {
+            if (request.body() != null  ) {
                 request.body().writeTo(requestBuffer);
             } else {
                 Log.d("LogTAG", "request.body() == null");
@@ -143,7 +174,6 @@ public class RetrofitService {
             LogUtil.i(" 》》》》  "," request.body() == "+request.body()+"");
             Log.i(" url=  ",request.url() + (request.body() != null ? "?" + _parseParams(request.body(), requestBuffer) : ""));
             final Response response = chain.proceed(request);
-
             return response;
         }
     };
@@ -181,10 +211,11 @@ public class RetrofitService {
     public static int page = 1;
     private static final Interceptor tokenInterceptor = new Interceptor() {
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public Response intercept(@NonNull Chain chain) throws IOException {
             Request request = chain.request();
             Response response = chain.proceed(request);
             LogUtil.i("response.code=" + response.code());
+            LogUtil.i("  token ====  "+response.header("token"));
 
             if(page == 1){
                 page++;
@@ -195,12 +226,8 @@ public class RetrofitService {
                 return chain.proceed(newRequest);
             }
 
-
 //            HomeMiddleItem middleItem =  commonApi.getmiddleItem().execute().body();
 //            LogUtil.i("response.code=  middleItem  " +middleItem);
-
-
-
             return response;
         }
     };
@@ -253,12 +280,12 @@ public class RetrofitService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<FindItem> getFind(int page){
-        return msgApi.getFind(page).subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
+//    public static Observable<FindItem> getFind(int page){
+//        return msgApi.getFind(page).subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+////                .subscribeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
 
 
 

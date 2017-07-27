@@ -8,4 +8,6 @@ import com.kaoyan.base.IBasePresenter;
 
 public interface LoginPresenter extends IBasePresenter {
     void login();
+
+    void loadBanner();
 }

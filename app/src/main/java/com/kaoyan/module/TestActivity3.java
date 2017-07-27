@@ -17,11 +17,14 @@ import com.kaoyan.R;
 import com.kaoyan.api.IApi;
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.base.IBaseView;
+import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.module.test.TestPresenter3;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -245,7 +248,17 @@ public class TestActivity3 extends BaseActivity implements IMainView {
     }
 
     @Override
+    public void loadFindList(List<FindItem.Find> finds) {
+
+    }
+
+    @Override
     public void login() {
+
+    }
+
+    @Override
+    public void loadBanner(BannerItem item) {
 
     }
 }

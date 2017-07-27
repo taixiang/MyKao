@@ -19,6 +19,7 @@ import com.kaoyan.adapter.TestCustomAdapter;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.base.BaseApplication;
+import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.utils.CommonUtil;
@@ -33,6 +34,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,7 +66,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     @OnClick(R.id.btn)
     void click(){
-//        p.login();
+        p.login();
     }
 
     @Override
@@ -132,7 +134,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
     public void loadNovel(FindItem item) {
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadmore();
-        list.addAll(item.pros);
+        list.addAll((List<FindItem.Find>)item.pros1);
         Log.i("》》》》》  "," list ====  "+list.size());
         if(adapter2 == null){
 //            adapter = new FindAdapter(list,this);
@@ -144,7 +146,17 @@ public class Test2Activity extends BaseActivity implements IMainView{
     }
 
     @Override
+    public void loadFindList(List<FindItem.Find> finds) {
+
+    }
+
+    @Override
     public void login() {
+
+    }
+
+    @Override
+    public void loadBanner(BannerItem item) {
 
     }
 

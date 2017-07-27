@@ -3,6 +3,7 @@ package com.kaoyan.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,15 +17,13 @@ import java.util.List;
  image_url: "https://img.ali
  */
 
-public class FindItem extends BaseItem {
+public class FindItem {
 
-    public List<Find> pros;
+    public List<Find> pros1 = new ArrayList<>();
 
-    protected FindItem(Parcel in) {
-        super(in);
-    }
 
-    public static class Find extends BaseItem {
+
+    public static class Find implements Parcelable{
         public String user_name;
         public String university;
         public String pro_id;
@@ -33,9 +32,28 @@ public class FindItem extends BaseItem {
         public String price_sell;
         public String image_url;
 
+
         protected Find(Parcel in) {
-            super(in);
+            user_name = in.readString();
+            university = in.readString();
+            pro_id = in.readString();
+            ISBN = in.readString();
+            pro_name = in.readString();
+            price_sell = in.readString();
+            image_url = in.readString();
         }
+
+        public static final Creator<Find> CREATOR = new Creator<Find>() {
+            @Override
+            public Find createFromParcel(Parcel in) {
+                return new Find(in);
+            }
+
+            @Override
+            public Find[] newArray(int size) {
+                return new Find[size];
+            }
+        };
 
         @Override
         public String toString() {
@@ -49,13 +67,30 @@ public class FindItem extends BaseItem {
                     ", image_url='" + image_url + '\'' +
                     '}';
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(user_name);
+            dest.writeString(university);
+            dest.writeString(pro_id);
+            dest.writeString(ISBN);
+            dest.writeString(pro_name);
+            dest.writeString(price_sell);
+            dest.writeString(image_url);
+        }
     }
+
 
     @Override
     public String toString() {
         return "FindItem{" +
-                "result='" + result + '\'' +
-                ", pros=" + pros +
+                "result='" + "" + '\'' +
+                ", pros=" + pros1 +
                 '}';
     }
 }

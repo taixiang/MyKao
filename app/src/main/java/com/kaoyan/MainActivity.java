@@ -16,11 +16,14 @@ import android.widget.TextView;
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.fragment.BannerItemFragment;
 import com.kaoyan.fragment.TestFragment;
+import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -94,7 +97,17 @@ public class MainActivity extends BaseActivity implements IMainView{
     }
 
     @Override
+    public void loadFindList(List<FindItem.Find> finds) {
+
+    }
+
+    @Override
     public void login() {
+
+    }
+
+    @Override
+    public void loadBanner(BannerItem item) {
 
     }
 

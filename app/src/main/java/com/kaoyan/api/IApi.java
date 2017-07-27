@@ -1,11 +1,16 @@
 package com.kaoyan.api;
 
+import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.NovelItem;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -21,8 +26,9 @@ public interface IApi {
     Observable<NovelItem> getNovel(@Query("page") int page);
 
     @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
-    Observable<FindItem> getFind(@Query("pageIndex")int page);
+    Observable<BaseItem<List<FindItem.Find>>> getFind(@Query("pageIndex")int page);
 
+    @Headers("token:"+"33333")
     @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
     Call<FindItem> getFindItem(@Query("pageIndex")int page);
 

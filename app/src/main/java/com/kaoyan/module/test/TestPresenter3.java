@@ -2,11 +2,14 @@ package com.kaoyan.module.test;
 
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.IBasePresenter;
+import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.NovelItem;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
+
+import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -27,7 +30,7 @@ public class TestPresenter3 implements IBasePresenter {
 
     @Override
     public void getData(boolean isRefresh) {
-        Observable<FindItem> t = RetrofitService.msgApi.getFind(1);
+        Observable<BaseItem<List<FindItem.Find>>> t = RetrofitService.msgApi.getFind(1);
         Observable<HomeMiddleItem> l = RetrofitService.commonApi.getMiddle();
         Observable.merge(t,l).subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -45,8 +48,12 @@ public class TestPresenter3 implements IBasePresenter {
 
                     @Override
                     public void onNext(Object o) {
-                        if(o instanceof FindItem){
-                            LogUtil.i(" merge FindItem "+((FindItem)o).toString());
+                        if(o instanceof BaseItem){
+                            LogUtil.i(" merge FindItem "+((BaseItem)o).toString());
+                            if((List<FindItem.Find>)((BaseItem) o).pros instanceof List){
+
+                            }
+                            List<FindItem.Find> list = (List<FindItem.Find>)((BaseItem) o).pros;
                         }
                         if(o instanceof HomeMiddleItem){
                             LogUtil.i(" merge HomeMiddleItem "+((HomeMiddleItem)o).toString());

@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kaoyan.R;
 import com.kaoyan.adapter.BannerAdapter;
 import com.kaoyan.adapter.TestAdapter2;
+import com.kaoyan.model.BannerItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.adapter.TestAdapter;
 import com.kaoyan.base.BaseFragment;
@@ -73,6 +74,7 @@ public class TestFragment extends BaseFragment implements IMainView{
         banner.setLayoutParams(ll);
         presenter = new IMainPresenter(this);
         presenter.getData(false);
+        presenter.loadBanner();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -115,13 +117,7 @@ public class TestFragment extends BaseFragment implements IMainView{
             }
         });
 
-        ArrayList<String> list = new ArrayList<>();
-        list.add("https://img.alicdn.com/bao/uploaded/i4/T1jr3BXhtfXXXXXXXX_!!0-item_pic.jpg");
-        list.add("https://img.alicdn.com/bao/uploaded/i4/T1jr3BXhtfXXXXXXXX_!!0-item_pic.jpg");
-        list.add("https://img.alicdn.com/bao/uploaded/i4/T1jr3BXhtfXXXXXXXX_!!0-item_pic.jpg");
 
-        banner.setImages(list);
-        banner.start();
 
     }
     @Override
@@ -144,7 +140,35 @@ public class TestFragment extends BaseFragment implements IMainView{
     public void loadNovel(FindItem item) {
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadmore();
-        list.addAll(item.pros);
+        list.addAll(item.pros1);
+
+        Log.i("》》》》》  "," list ====  "+list.size());
+        if(adapter == null){
+            Log.i("》》》》》  "," adapter notifyData fail ");
+            recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+            adapter = new TestAdapter(R.layout.adapter_keywords,list);
+//            adapter2 = new TestAdapter2(mActivity,list,R.layout.adapter_keywords);
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Log.i("》》》》  "," ===== "+position);
+                    ToastUtils.showToast(mActivity,position+" ");
+                    Test2Activity.actTo2(mActivity);
+                }
+            });
+
+            recyclerView.setAdapter(adapter);
+        }else {
+            Log.i("》》》》》  "," adapter notifyData");
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void loadFindList(List<FindItem.Find> finds) {
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadmore();
+        list.addAll(finds);
 
         Log.i("》》》》》  "," list ====  "+list.size());
         if(adapter == null){
@@ -171,6 +195,16 @@ public class TestFragment extends BaseFragment implements IMainView{
     @Override
     public void login() {
 
+    }
+
+    @Override
+    public void loadBanner(BannerItem item) {
+        ArrayList<String> list = new ArrayList<>();
+        for (BannerItem.News banner : item.news){
+            list.add(banner.img_url);
+        }
+        banner.setImages(list);
+        banner.start();
     }
 
     @Override
