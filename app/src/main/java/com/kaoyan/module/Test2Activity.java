@@ -147,7 +147,15 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     @Override
     public void loadFindList(List<FindItem.Find> finds) {
-
+        list.addAll(finds);
+        Log.i("》》》》》  "," list ====  "+list.size());
+        if(adapter2 == null){
+//            adapter = new FindAdapter(list,this);
+            adapter2 = new TestCustomAdapter(this,list,R.layout.adapter_keywords);
+            recyclerView.setAdapter(adapter2);
+        }else {
+            adapter2.notifyDataSetChanged();
+        }
     }
 
     @Override

@@ -46,10 +46,10 @@ public abstract class BaseCustomAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = getViewHolder(position,convertView,parent);
-        convert(viewHolder,getItem(position),position);
+        convert(mContext,viewHolder,getItem(position),position);
         return viewHolder.getConvertView();
     }
-    public abstract void convert(ViewHolder helper, T item,int position);
+    public abstract void convert(Context context,ViewHolder helper, T item,int position);
 
     private ViewHolder getViewHolder(int position, View convertView,
                                      ViewGroup parent)

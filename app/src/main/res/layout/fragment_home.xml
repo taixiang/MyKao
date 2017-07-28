@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:background="@color/viewBgColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"/>
+
+                <com.kaoyan.widget.CustomGridView
+                    android:id="@+id/gv_category"
+                    android:numColumns="4"
+                    android:background="@color/viewBgColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:background="@color/viewBgColor"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="限时活动"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/h_scrollview"
+                        android:scrollbars="none"
+                        android:layout_marginTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <LinearLayout
+                            android:id="@+id/ll_limit_act"
+                            android:orientation="horizontal"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:background="@color/viewBgColor"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="推荐课程"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.kaoyan.widget.CustomListView
+                        android:id="@+id/lv_recommend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+</LinearLayout>

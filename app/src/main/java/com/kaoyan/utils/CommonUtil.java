@@ -88,7 +88,7 @@ public class CommonUtil {
     /**
      * 获取屏幕宽高
      * @param context
-     * @return
+     * @return 数组存放宽高
      */
     public static int[] getWidthAndHeight(Context context){
         int[] wh = new int[2];

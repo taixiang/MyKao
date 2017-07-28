@@ -48,7 +48,7 @@ import butterknife.BindView;
  * Created by tx on 2017/7/18.
  */
 
-public class TestFragment extends BaseFragment implements IMainView{
+public class TestFragment extends BaseFragment implements IMainView {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.recycler)
@@ -57,7 +57,7 @@ public class TestFragment extends BaseFragment implements IMainView{
     Banner banner;
     private IMainPresenter presenter;
     private TestAdapter adapter;
-//    private TestAdapter2 adapter2;
+    //    private TestAdapter2 adapter2;
     private ArrayList<FindItem.Find> list = new ArrayList<>();
 
     @Override
@@ -68,13 +68,27 @@ public class TestFragment extends BaseFragment implements IMainView{
     @Override
     protected void init() {
 //        mIsMulti = false;
-        LogUtil.i(" widthheigth == 》》》》  "+CommonUtil.getWidthAndHeight(mActivity)[0]+"   "+CommonUtil.getWidthAndHeight(mActivity)[1] + "    " +CommonUtil.getWidthAndHeight(mActivity)[0]*2/5);
+        LogUtil.i(" widthheigth == 》》》》  " + CommonUtil.getWidthAndHeight(mActivity)[0] + "   " + CommonUtil.getWidthAndHeight(mActivity)[1] + "    " + CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
 
-        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,CommonUtil.getWidthAndHeight(mActivity)[0]*2/5);
+        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
         banner.setLayoutParams(ll);
         presenter = new IMainPresenter(this);
         presenter.getData(false);
+        LogUtil.i("  11111  "+Thread.currentThread().getName());
+
+        presenter.getData(false);
+        LogUtil.i("  222222  "+Thread.currentThread().getName());
+
         presenter.loadBanner();
+
+        LogUtil.i("  33333  "+Thread.currentThread().getName());
+
+        presenter.getData(false);
+        LogUtil.i("  44444  "+Thread.currentThread().getName());
+
+        presenter.getData(false);
+        LogUtil.i("  555555  "+Thread.currentThread().getName());
+
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -91,13 +105,13 @@ public class TestFragment extends BaseFragment implements IMainView{
         banner.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
-                ImgManager.loadImage(context, (String) path,imageView);
+                ImgManager.loadImage(context, (String) path, imageView);
             }
         });
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                ToastUtils.showToast(mActivity,""+position);
+                ToastUtils.showToast(mActivity, "" + position);
             }
         });
         banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -118,12 +132,11 @@ public class TestFragment extends BaseFragment implements IMainView{
         });
 
 
-
     }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-            super.setUserVisibleHint(isVisibleToUser);
-
+        super.setUserVisibleHint(isVisibleToUser);
 
 
         LogUtil.i("baseFragment 》》》》》 test  super.setUserVisibleHint   after");
@@ -142,24 +155,24 @@ public class TestFragment extends BaseFragment implements IMainView{
         refreshLayout.finishLoadmore();
         list.addAll(item.pros1);
 
-        Log.i("》》》》》  "," list ====  "+list.size());
-        if(adapter == null){
-            Log.i("》》》》》  "," adapter notifyData fail ");
+        Log.i("》》》》》  ", " list ====  " + list.size());
+        if (adapter == null) {
+            Log.i("》》》》》  ", " adapter notifyData fail ");
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-            adapter = new TestAdapter(R.layout.adapter_keywords,list);
+            adapter = new TestAdapter(R.layout.adapter_keywords, list);
 //            adapter2 = new TestAdapter2(mActivity,list,R.layout.adapter_keywords);
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Log.i("》》》》  "," ===== "+position);
-                    ToastUtils.showToast(mActivity,position+" ");
+                    Log.i("》》》》  ", " ===== " + position);
+                    ToastUtils.showToast(mActivity, position + " ");
                     Test2Activity.actTo2(mActivity);
                 }
             });
 
             recyclerView.setAdapter(adapter);
-        }else {
-            Log.i("》》》》》  "," adapter notifyData");
+        } else {
+            Log.i("》》》》》  ", " adapter notifyData");
             adapter.notifyDataSetChanged();
         }
     }
@@ -170,24 +183,24 @@ public class TestFragment extends BaseFragment implements IMainView{
         refreshLayout.finishLoadmore();
         list.addAll(finds);
 
-        Log.i("》》》》》  "," list ====  "+list.size());
-        if(adapter == null){
-            Log.i("》》》》》  "," adapter notifyData fail ");
+        Log.i("》》》》》  ", " list ====  " + list.size());
+        if (adapter == null) {
+            Log.i("》》》》》  ", " adapter notifyData fail ");
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-            adapter = new TestAdapter(R.layout.adapter_keywords,list);
+            adapter = new TestAdapter(R.layout.adapter_keywords, list);
 //            adapter2 = new TestAdapter2(mActivity,list,R.layout.adapter_keywords);
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Log.i("》》》》  "," ===== "+position);
-                    ToastUtils.showToast(mActivity,position+" ");
+                    Log.i("》》》》  ", " ===== " + position);
+                    ToastUtils.showToast(mActivity, position + " ");
                     Test2Activity.actTo2(mActivity);
                 }
             });
 
             recyclerView.setAdapter(adapter);
-        }else {
-            Log.i("》》》》》  "," adapter notifyData");
+        } else {
+            Log.i("》》》》》  ", " adapter notifyData");
             adapter.notifyDataSetChanged();
         }
     }
@@ -200,9 +213,12 @@ public class TestFragment extends BaseFragment implements IMainView{
     @Override
     public void loadBanner(BannerItem item) {
         ArrayList<String> list = new ArrayList<>();
-        for (BannerItem.News banner : item.news){
-            list.add(banner.img_url);
+        for(int i=0;i<4;i++){
+            list.add(item.news.get(i).img_url);
         }
+//        for (BannerItem.News banner : item.news ) {
+//            list.add(banner.img_url);
+//        }
         banner.setImages(list);
         banner.start();
     }

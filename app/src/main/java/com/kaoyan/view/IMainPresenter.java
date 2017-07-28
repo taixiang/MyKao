@@ -184,6 +184,7 @@ public class IMainPresenter implements LoginPresenter {
 
                     @Override
                     public void onNext(BannerItem bannerItem) {
+                        LogUtil.i("  bannerItem  "+Thread.currentThread().getName());
                         mView.loadBanner(bannerItem);
                     }
                 });
@@ -220,19 +221,19 @@ public class IMainPresenter implements LoginPresenter {
         RetrofitService.toSub(RetrofitService.msgApi.getFind(page), new Subscriber<List<FindItem.Find>>() {
             @Override
             public void onCompleted() {
-                LogUtil.i("  findItem == onCompleted ");
+
             }
 
             @Override
             public void onError(Throwable e) {
-                LogUtil.i("  findItem ==  Throwable"+e.toString());
+
             }
 
             @Override
             public void onNext(List<FindItem.Find> findItem) {
                 LogUtil.i("  threadname onnext == "+Thread.currentThread().getName());
 
-                LogUtil.i("  findItem ==  "+findItem.toString());
+
                 mView.loadFindList(findItem);
             }
         },mView.<List<FindItem.Find>>bindToLife());

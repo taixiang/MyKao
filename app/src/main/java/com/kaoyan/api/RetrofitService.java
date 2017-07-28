@@ -71,7 +71,7 @@ public class RetrofitService {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
-                .addInterceptor(interceptor)
+//                .addInterceptor(interceptor)
 //                .addInterceptor(tokenInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .build();
@@ -132,9 +132,9 @@ public class RetrofitService {
 //            if(tHttpBean.result.equals("true")){
 //                throw new NullPointerException();
 //            }
-            LogUtil.i(" httpBean ==   "+tHttpBean);
-
-            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
+//            LogUtil.i(" httpBean ==   "+tHttpBean);
+//
+//            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
 
 
             return tHttpBean.pros;
