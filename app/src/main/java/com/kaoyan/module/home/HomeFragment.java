@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment {
      * 限时活动
      */
     private void initAct() {
-        final int[] test = {1,2};
+        final int[] test = {1};
         hScrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -104,7 +104,6 @@ public class HomeFragment extends BaseFragment {
             }
             iv.setLayoutParams(params);
             ImgManager.loadImage(mActivity,"http://m.iisbn.com/images_side/1.jpg",iv);
-
             llLimitAct.addView(view);
         }
     }

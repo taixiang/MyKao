@@ -9,8 +9,6 @@
     <ImageView
         android:id="@+id/iv_home_limit_act"
         android:layout_width="wrap_content"
-
-        android:background="#ff00"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -19,6 +19,7 @@ import com.kaoyan.fragment.TestFragment;
 import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
+import com.kaoyan.module.Course.CourseFragment;
 import com.kaoyan.module.home.HomeFragment;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.LogUtil;
@@ -37,7 +38,7 @@ public class MainActivity extends BaseActivity implements IMainView{
 
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class,BannerItemFragment.class,TestFragment.class,TestFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class,CourseFragment.class,TestFragment.class,TestFragment.class};
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.selector_tab_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};

@@ -8,6 +8,7 @@ import com.kaoyan.BuildConfig;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.database.DaoMaster;
 import com.kaoyan.database.DaoSession;
+import com.kaoyan.utils.CrashHandler;
 import com.kaoyan.utils.GreenDaoManager;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.ToastUtils;
@@ -32,6 +33,7 @@ public class BaseApplication extends Application {
         }
         RetrofitService.init(this);
         GreenDaoManager.getInstance(this);
+        CrashHandler.getInstance().init(this);
 //        _initDatabase();
     }
 

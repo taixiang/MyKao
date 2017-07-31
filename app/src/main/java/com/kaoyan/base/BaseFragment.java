@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kaoyan.R;
+import com.kaoyan.widget.EmptyLayout;
 import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -19,6 +22,10 @@ import butterknife.ButterKnife;
  * fragment基类
  */
 public abstract class BaseFragment extends RxFragment implements IBaseView {
+
+    @Nullable
+    @BindView(R.id.llEmpty)
+    EmptyLayout emptyLayout;
 
     /**
      * 绑定布局文件
@@ -80,10 +87,16 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
 
     @Override
     public void showLoading() {
+        if(emptyLayout != null){
+            emptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        }
     }
 
     @Override
     public void hideLoading() {
+        if(emptyLayout != null){
+            emptyLayout.hide();
+        }
 //        LoadingDialog.dismissDialog();
     }
 

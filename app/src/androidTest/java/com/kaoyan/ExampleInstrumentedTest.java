@@ -53,7 +53,7 @@ public class ExampleInstrumentedTest
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         appContext.startActivity(intent);
 //        onView(withId(R.id.btn)).check(matches(isDisplayed()));
-        onView(withId(R.id.btn)).perform(click());
+//        onView(withId(R.id.btn)).perform(click());
 
     }
 

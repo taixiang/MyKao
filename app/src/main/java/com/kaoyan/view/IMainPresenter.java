@@ -76,6 +76,7 @@ public class IMainPresenter implements LoginPresenter {
             page = 1;
         }
         LogUtil.i(" present  getData ");
+        mView.showLoading();
         doGetFind();
 //        getFind(page).doOnSubscribe(new Action0() {
 //            @Override
@@ -179,13 +180,14 @@ public class IMainPresenter implements LoginPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.hideLoading();
                     }
 
                     @Override
                     public void onNext(BannerItem bannerItem) {
                         LogUtil.i("  bannerItem  "+Thread.currentThread().getName());
                         mView.loadBanner(bannerItem);
+                        mView.hideLoading();
                     }
                 });
     }
@@ -222,21 +224,23 @@ public class IMainPresenter implements LoginPresenter {
             @Override
             public void onCompleted() {
 
+                LogUtil.i("  onCompleted   ");
+
             }
 
             @Override
             public void onError(Throwable e) {
-
+                LogUtil.i("  error   "+e.getMessage());
+                mView.hideLoading();
             }
 
             @Override
             public void onNext(List<FindItem.Find> findItem) {
                 LogUtil.i("  threadname onnext == "+Thread.currentThread().getName());
 
-
+                mView.hideLoading();
                 mView.loadFindList(findItem);
             }
         },mView.<List<FindItem.Find>>bindToLife());
     }
-
 }

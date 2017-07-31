@@ -60,6 +60,10 @@ public class TestFragment extends BaseFragment implements IMainView {
     //    private TestAdapter2 adapter2;
     private ArrayList<FindItem.Find> list = new ArrayList<>();
 
+    public static TestFragment newInstance(){
+        return new TestFragment();
+    }
+
     @Override
     protected int attachLayoutRes() {
         return R.layout.fragment_test;
@@ -165,7 +169,7 @@ public class TestFragment extends BaseFragment implements IMainView {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     Log.i("》》》》  ", " ===== " + position);
-                    ToastUtils.showToast(mActivity, position + " ");
+//                    ToastUtils.showToast(mActivity, position + " ");
                     Test2Activity.actTo2(mActivity);
                 }
             });
@@ -193,7 +197,7 @@ public class TestFragment extends BaseFragment implements IMainView {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     Log.i("》》》》  ", " ===== " + position);
-                    ToastUtils.showToast(mActivity, position + " ");
+//                    ToastUtils.showToast(mActivity, position + " ");
                     Test2Activity.actTo2(mActivity);
                 }
             });

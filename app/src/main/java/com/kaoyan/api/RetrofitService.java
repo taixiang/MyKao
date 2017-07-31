@@ -130,7 +130,7 @@ public class RetrofitService {
         @Override
         public T call(BaseItem<T> tHttpBean) {
 //            if(tHttpBean.result.equals("true")){
-//                throw new NullPointerException();
+//                throw new ApiException(1);
 //            }
 //            LogUtil.i(" httpBean ==   "+tHttpBean);
 //
