@@ -16,7 +16,7 @@ import com.kaoyan.R;
  */
 
 public class LoadingDialog {
-    private static Dialog dialog;
+    private Dialog dialog;
 //    public  LoadingDialog(Context context){
 //        View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_loading,null);
 //        ImageView imageView = view.findViewById(R.id.img);
@@ -27,7 +27,7 @@ public class LoadingDialog {
 //        dialog.show();
 //    }
 
-    public static void showDialog(Context context){
+    public LoadingDialog(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_loading,null);
         ImageView imageView = view.findViewById(R.id.img);
         Animation animation = AnimationUtils.loadAnimation(context,R.anim.loading_animation);
@@ -40,10 +40,9 @@ public class LoadingDialog {
 //        }
     }
 
-    public static void dismissDialog(){
-
+    public void dismissDialog(){
+//        dialog.cancel();
             dialog.dismiss();
-
     }
 
 

@@ -18,13 +18,17 @@ public class ImgManager {
     //TODO 换默认图片 ic_launcher
     public static void loadImage(Context context, String url, int erroImg, int emptyImg, ImageView iv) {
         //原生 API
-        Glide.with(context).load(url).placeholder(emptyImg).error(erroImg).into(iv);
+        Glide.with(context).load(url).skipMemoryCache(true).placeholder(emptyImg).error(erroImg).into(iv);
     }
 
     public static void loadImage(Context context, String url, ImageView iv) {
-        //原生 APIsignature(new StringSignature(Math.random()+"")).
 
-        Glide.with(context).load(url).crossFade().error(R.mipmap.ic_launcher).into(iv);
+        Glide.with(context).load(url).skipMemoryCache(true).dontAnimate().error(R.mipmap.ic_launcher).into(iv);
+    }
+
+    public static void loadImageWithNoAnim(Context context, String url, ImageView iv){
+        Glide.with(context).load(url).dontAnimate().error(R.mipmap.ic_launcher).into(iv);
+
     }
 
     public static void loadGifImage(Context context, String url, ImageView iv) {
@@ -42,17 +46,11 @@ public class ImgManager {
 
 
     public static void loadImage(Context context, final File file, final ImageView imageView) {
-        Glide.with(context)
-                .load(file)
-                .into(imageView);
-
-
+        Glide.with(context).load(file).into(imageView);
     }
 
     public static void loadImage(Context context, final int resourceId, final ImageView imageView) {
-        Glide.with(context)
-                .load(resourceId)
-                .into(imageView);
+        Glide.with(context).load(resourceId).into(imageView);
     }
 
 

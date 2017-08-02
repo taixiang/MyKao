@@ -100,13 +100,13 @@ public class RetrofitService {
 
     public static <T> void toSub(Observable<BaseItem<T>> ob,Subscriber<T> subscriber,LifecycleTransformer<T> l){
         ob.subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
 //                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new ResultFilter<T>()).doOnSubscribe(new Action0() {
             @Override
             public void call() {
-                LogUtil.i("  threadname == "+Thread.currentThread().getName());
+                LogUtil.i("  threadname doOnSubscribe =="+Thread.currentThread().getName());
             }
         }).compose(l).subscribe(subscriber);
 
@@ -122,6 +122,7 @@ public class RetrofitService {
             @Override
             public void call() {
                 LogUtil.i("  threadname == "+Thread.currentThread().getName());
+
             }
         }).compose(l).subscribe(subscriber);
     }
@@ -134,8 +135,7 @@ public class RetrofitService {
 //            }
 //            LogUtil.i(" httpBean ==   "+tHttpBean);
 //
-//            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
-
+            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
 
             return tHttpBean.pros;
         }

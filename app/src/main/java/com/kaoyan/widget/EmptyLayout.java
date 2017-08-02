@@ -29,7 +29,7 @@ public class EmptyLayout extends FrameLayout {
     public static final int STATUS_NO_DATA = 3;
 
     private Context mContext;
-    private int mEmptyStatus = STATUS_LOADING;
+    private int mEmptyStatus = STATUS_HIDE;
 
 
 

@@ -21,6 +21,7 @@ import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.module.test.TestPresenter3;
+import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
 
@@ -50,6 +51,8 @@ public class TestActivity3 extends BaseActivity implements IMainView {
 
     TestPresenter3 t;
 
+    @BindView(R.id.photoView)
+    ImageView photoView;
     @Override
     protected int attachLayoutRes() {
         return R.layout.activity_test3;
@@ -57,6 +60,7 @@ public class TestActivity3 extends BaseActivity implements IMainView {
 
     @Override
     protected void init() {
+        ImgManager.loadImage(mActivity,"http://m.iisbn.com/images_side/1.jpg",photoView);
         mSearchBGTxt.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override

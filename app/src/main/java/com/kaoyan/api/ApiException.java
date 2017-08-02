@@ -7,6 +7,12 @@ package com.kaoyan.api;
 public class ApiException extends RuntimeException {
 
     public ApiException(int status) {
-        super(status+"");
+
+        super(getApiStatus(status));
+    }
+
+    private static String getApiStatus(int status){
+
+        return "";
     }
 }

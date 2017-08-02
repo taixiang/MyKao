@@ -28,6 +28,7 @@ import com.kaoyan.utils.NetUtil;
 import com.kaoyan.utils.ToastUtils;
 import com.kaoyan.view.IMainPresenter;
 import com.kaoyan.view.IMainView;
+import com.kaoyan.widget.LoadingDialog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -97,7 +98,8 @@ public class Test2Activity extends BaseActivity implements IMainView{
         setTitle("标题");
         goBack();
         p.getData(false);
-        
+
+
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {

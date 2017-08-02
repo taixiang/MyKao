@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends RxAppCompatActivity implements IBaseView{
     protected BaseActivity mActivity;
+    LoadingDialog dialog ;
 
     @Nullable
     @BindView(R.id.llEmpty)
@@ -118,16 +119,22 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     @Override
     public void showLoading() {
-        if(emptyLayout != null){
-            emptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+//        if(emptyLayout != null){
+//            emptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+//        }
+        if(dialog == null){
+            dialog = new LoadingDialog(mActivity);
         }
 //        LoadingDialog.showDialog(this);
     }
 
     @Override
     public void hideLoading() {
-        if(emptyLayout != null){
-            emptyLayout.hide();
+//        if(emptyLayout != null){
+//            emptyLayout.hide();
+//        }
+        if(dialog != null){
+            dialog.dismissDialog();
         }
 //        LoadingDialog.dismissDialog();
     }
@@ -154,8 +161,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
     public void loadNoData() {
 
     }
-
-    
 
 
     /**

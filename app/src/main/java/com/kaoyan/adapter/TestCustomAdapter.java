@@ -1,6 +1,7 @@
 package com.kaoyan.adapter;
 
 import android.content.Context;
+import android.text.TextPaint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

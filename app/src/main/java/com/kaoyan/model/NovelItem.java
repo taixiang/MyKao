@@ -21,7 +21,9 @@ public class NovelItem extends BaseItem {
     public boolean result;
     public List<Novel> pros;
 
-
+    protected NovelItem(Parcel in) {
+        super(in);
+    }
 
 
     public static class Novel extends BaseItem {
@@ -34,6 +36,9 @@ public class NovelItem extends BaseItem {
         public String sale_nums;
         public String goods_nums;
 
+        protected Novel(Parcel in) {
+            super(in);
+        }
 
 
         @Override

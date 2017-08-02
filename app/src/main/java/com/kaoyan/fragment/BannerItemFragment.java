@@ -111,7 +111,6 @@ public class BannerItemFragment extends BaseFragment {
 //        String url = getArguments().getString("banner_url");
 //        ImgManager.loadImage(mActivity,url,ivBanner);
         mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
         mIsMulti = false;
         LogUtil.i(" bannerItem  init ");
         userDao = GreenDaoManager.getInstance(mActivity).getDaosession().getUserDao();

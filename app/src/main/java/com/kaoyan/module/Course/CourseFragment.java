@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
 import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;
@@ -23,6 +24,8 @@ public class CourseFragment extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.iv)
+    ImageView iv;
 
     private String[] titles = {"全部","蜕变计划","专业课","协议班","联报班","协议班","公共课1对1"};
 

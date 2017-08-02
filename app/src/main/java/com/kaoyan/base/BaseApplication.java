@@ -10,8 +10,11 @@ import com.kaoyan.database.DaoMaster;
 import com.kaoyan.database.DaoSession;
 import com.kaoyan.utils.CrashHandler;
 import com.kaoyan.utils.GreenDaoManager;
+import com.kaoyan.utils.ImagePickerLoader;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.ToastUtils;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.view.CropImageView;
 import com.squareup.leakcanary.LeakCanary;
 
 import org.greenrobot.greendao.database.Database;
@@ -34,6 +37,7 @@ public class BaseApplication extends Application {
         RetrofitService.init(this);
         GreenDaoManager.getInstance(this);
         CrashHandler.getInstance().init(this);
+        initPicker();
 //        _initDatabase();
     }
 
@@ -44,6 +48,20 @@ public class BaseApplication extends Application {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getInstance(), DB_NAME);
         Database database = helper.getWritableDb();
         mDaoSession = new DaoMaster(database).newSession();
+    }
+
+    private void initPicker(){
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setMultiMode(false);
+        imagePicker.setImageLoader(new ImagePickerLoader());
+        imagePicker.setShowCamera(true);
+        imagePicker.setCrop(true);
+        imagePicker.setSaveRectangle(true);
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);
+        imagePicker.setFocusWidth(800);
+        imagePicker.setFocusHeight(800);
+        imagePicker.setOutPutX(1000);
+        imagePicker.setOutPutY(1000);
     }
 
     public static BaseApplication getInstance() {

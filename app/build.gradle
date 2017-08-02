@@ -12,6 +12,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+//        debug{
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -66,5 +70,10 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     //greendao
     compile 'org.greenrobot:greendao:3.2.2'
-
+    //circleview
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    //imagePicker
+    compile 'com.lzy.widget:imagepicker:0.5.5'
+    //eventbus
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

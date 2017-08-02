@@ -8,7 +8,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
-import android.util.Log;
 
 
 import com.kaoyan.MainActivity;
@@ -71,7 +70,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                Log.e(TAG, "error : ", e);
+                LogUtil.e(TAG, "error : "+e);
             }
             // 退出程序,注释下面的重启启动程序代码
 //        android.os.Process.killProcess(android.os.Process.myPid());
@@ -129,7 +128,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         //如果SD卡不存在或无法使用，则无法把异常信息写入SD卡
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             if (DEBUG) {
-                Log.w(TAG, "sdcard unmounted,skip dump exception");
+                LogUtil.e(TAG, "sdcard unmounted,skip dump exception");
                 return;
             }
         }
@@ -153,7 +152,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             ex.printStackTrace(pw);
             pw.close();
         } catch (Exception e) {
-            Log.e(TAG, "dump crash info failed");
+            LogUtil.e(TAG, "dump crash info failed");
         }
     }
 

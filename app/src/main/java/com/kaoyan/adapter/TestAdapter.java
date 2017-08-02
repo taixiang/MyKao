@@ -26,5 +26,6 @@ public class TestAdapter extends BaseQuickAdapter<FindItem.Find,BaseViewHolder> 
     @Override
     protected void convert(BaseViewHolder helper, FindItem.Find item) {
         helper.setText(R.id.tv_name,item.pro_name).setText(R.id.tv_count,item.price_sell);
+
     }
 }

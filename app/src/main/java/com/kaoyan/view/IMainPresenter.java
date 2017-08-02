@@ -216,8 +216,6 @@ public class IMainPresenter implements LoginPresenter {
 //        });
     }
 
-
-
     private void doGetFind(){
 
         RetrofitService.toSub(RetrofitService.msgApi.getFind(page), new Subscriber<List<FindItem.Find>>() {
@@ -225,7 +223,6 @@ public class IMainPresenter implements LoginPresenter {
             public void onCompleted() {
 
                 LogUtil.i("  onCompleted   ");
-
             }
 
             @Override

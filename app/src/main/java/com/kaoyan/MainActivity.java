@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.fragment.BannerItemFragment;
@@ -21,6 +22,7 @@ import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.module.Course.CourseFragment;
 import com.kaoyan.module.home.HomeFragment;
+import com.kaoyan.module.me.MeFragment;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
@@ -38,13 +40,15 @@ public class MainActivity extends BaseActivity implements IMainView{
 
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class,CourseFragment.class,TestFragment.class,TestFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class,CourseFragment.class,TestFragment.class,MeFragment.class};
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.selector_tab_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};
 
     //Tab选项卡的文字
     private String mTextviewArray[] = {"首页", "选课", "活动", "我的"};
+
+    private long exitTime = 0;
 
     @Override
     protected int attachLayoutRes() {
@@ -116,5 +120,15 @@ public class MainActivity extends BaseActivity implements IMainView{
     @Override
     public void loadNoData() {
 
+    }
+
+    private void exit(){
+        if(System.currentTimeMillis() - exitTime > 2000){
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            LogUtil.i(" exittime "+exitTime);
+            exitTime = System.currentTimeMillis();
+        }else {
+            finish();
+        }
     }
 }
