@@ -36,7 +36,7 @@ public class BaseApplication extends Application {
         }
         RetrofitService.init(this);
         GreenDaoManager.getInstance(this);
-        CrashHandler.getInstance().init(this);
+//        CrashHandler.getInstance().init(this);
         initPicker();
 //        _initDatabase();
     }

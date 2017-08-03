@@ -40,8 +40,6 @@ public class IMainPresenter implements LoginPresenter {
     @Override
     public void getData(final boolean isRefresh) {
 
-
-
 //        RetrofitService.getMiddleItem().doOnSubscribe(new Action0() {
 //            @Override
 //            public void call() {
@@ -192,6 +190,36 @@ public class IMainPresenter implements LoginPresenter {
                 });
     }
 
+    @Override
+    public void loadCourse(int tag) {
+        if(tag == 2017){
+            page = 1;
+        }else {
+            page =2;
+        }
+        RetrofitService.toSub(RetrofitService.msgApi.getFind(page), new Subscriber<List<FindItem.Find>>() {
+            @Override
+            public void onCompleted() {
+
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtil.i("  error   "+e.getMessage());
+                mView.hideLoading();
+            }
+
+            @Override
+            public void onNext(List<FindItem.Find> findItem) {
+                LogUtil.i("  onNext  "+findItem.toString());
+
+                mView.hideLoading();
+                mView.loadFindList(findItem);
+            }
+        },mView.<List<FindItem.Find>>bindToLife());
+    }
+
     private void getData(){
 //        getFind(page).flatMap(new Func1<FindItem, Observable<FindItem.Find>>() {
 //            @Override
@@ -233,7 +261,6 @@ public class IMainPresenter implements LoginPresenter {
 
             @Override
             public void onNext(List<FindItem.Find> findItem) {
-                LogUtil.i("  threadname onnext == "+Thread.currentThread().getName());
 
                 mView.hideLoading();
                 mView.loadFindList(findItem);

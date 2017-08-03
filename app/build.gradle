@@ -54,8 +54,8 @@ dependencies {
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
     //smartrefresh
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-7'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.2-alpha-7'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-6'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3-alpha-6'
     //butterknife
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'

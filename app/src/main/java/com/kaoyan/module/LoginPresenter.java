@@ -10,4 +10,7 @@ public interface LoginPresenter extends IBasePresenter {
     void login();
 
     void loadBanner();
+
+    void loadCourse(int tag);
+
 }

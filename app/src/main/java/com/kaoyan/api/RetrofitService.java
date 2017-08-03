@@ -121,7 +121,7 @@ public class RetrofitService {
                 .map(new ResultFilter<T>()).doOnSubscribe(new Action0() {
             @Override
             public void call() {
-                LogUtil.i("  threadname == "+Thread.currentThread().getName());
+//                LogUtil.i("  threadname == "+Thread.currentThread().getName());
 
             }
         }).compose(l).subscribe(subscriber);
@@ -135,7 +135,7 @@ public class RetrofitService {
 //            }
 //            LogUtil.i(" httpBean ==   "+tHttpBean);
 //
-            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
+//            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
 
             return tHttpBean.pros;
         }
