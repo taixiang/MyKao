@@ -197,10 +197,13 @@ public class IMainPresenter implements LoginPresenter {
         }else {
             page =2;
         }
+        mView.showLoading();
         RetrofitService.toSub(RetrofitService.msgApi.getFind(page), new Subscriber<List<FindItem.Find>>() {
             @Override
             public void onCompleted() {
+                LogUtil.i("  onCompleted   ");
 
+                mView.hideLoading();
 
             }
 

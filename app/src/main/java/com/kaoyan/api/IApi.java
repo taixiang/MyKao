@@ -25,6 +25,7 @@ public interface IApi {
     @GET("API/pro.ashx?action=novel")
     Observable<NovelItem> getNovel(@Query("page") int page);
 
+    @Headers("Content-Type:application/json; charset=utf-8")
     @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
     Observable<BaseItem<List<FindItem.Find>>> getFind(@Query("pageIndex")int page);
 

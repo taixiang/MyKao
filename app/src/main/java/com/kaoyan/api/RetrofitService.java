@@ -33,6 +33,7 @@ import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Headers;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -214,17 +215,22 @@ public class RetrofitService {
         public Response intercept(@NonNull Chain chain) throws IOException {
             Request request = chain.request();
             Response response = chain.proceed(request);
-            LogUtil.i("response.code=" + response.code());
-            LogUtil.i("  token ====  "+response.header("token"));
 
-            if(page == 1){
-                page++;
-                FindItem findItem =  msgApi.getFindItem(2).execute().body();
-                LogUtil.i("response  page = "+page);
-                Request newRequest =  request.newBuilder().build();
-                response.close();
-                return chain.proceed(newRequest);
-            }
+            okhttp3.Headers headers = request.headers();
+            LogUtil.i(" headers==  "+headers.toString());
+
+//            LogUtil.i("response.code=" + response.code());
+//            LogUtil.i("  token ====  "+response.header("token"));
+//
+//
+//            if(page == 1){
+//                page++;
+//                FindItem findItem =  msgApi.getFindItem(2).execute().body();
+//                LogUtil.i("response  page = "+page);
+//                Request newRequest =  request.newBuilder().build();
+//                response.close();
+//                return chain.proceed(newRequest);
+//            }
 
 //            HomeMiddleItem middleItem =  commonApi.getmiddleItem().execute().body();
 //            LogUtil.i("response.code=  middleItem  " +middleItem);

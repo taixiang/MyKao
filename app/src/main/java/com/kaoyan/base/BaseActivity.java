@@ -15,6 +15,8 @@ import com.kaoyan.utils.LogUtil;
 import com.kaoyan.widget.EmptyLayout;
 import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle.android.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.BindView;
@@ -149,7 +151,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     @Override
     public <T> LifecycleTransformer<T> bindToLife() {
-        return this.<T>bindToLifecycle();
+        return this.<T>bindUntilEvent(ActivityEvent.DESTROY);
     }
 
     @Override

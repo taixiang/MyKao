@@ -97,7 +97,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
     protected void init() {
         setTitle("标题");
         goBack();
-        p.getData(false);
+//        p.getData(false);
 
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {

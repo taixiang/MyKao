@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kaoyan.MainActivity">
-
+    <com.kaoyan.widget.EmptyLayout
+        android:id="@+id/llEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -21,8 +24,7 @@
 
             <com.youth.banner.Banner
                 android:id="@+id/banner"
-                android:visibility="gone"
-                app:image_scale_type="fit_center"
+                app:image_scale_type="fit_xy"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"/>
 
@@ -36,9 +38,6 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <com.kaoyan.widget.EmptyLayout
-        android:id="@+id/llEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
 </RelativeLayout>

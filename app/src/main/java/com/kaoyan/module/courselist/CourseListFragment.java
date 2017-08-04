@@ -50,16 +50,17 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
     RecyclerView recyclerView;
     @BindView(R.id.banner)
     Banner banner;
-    private IMainPresenter presenter;
+    private IMainPresenter presenter = new IMainPresenter(this);
     private TestAdapter adapter;
     //    private TestAdapter2 adapter2;
     private ArrayList<FindItem.Find> list = new ArrayList<>();
       int year;
 
-    public static CourseListFragment newInstance(int year){
+    public static CourseListFragment newInstance(int year,boolean isFirst){
         CourseListFragment fragment = new CourseListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("year",year);
+        bundle.putBoolean("isFirst",isFirst);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -70,9 +71,6 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
 
     public void reGetData(int tag){
         LogUtil.i(" tag === " + tag);
-        if(presenter == null){
-            presenter = new IMainPresenter(this);
-        }
         presenter.loadCourse(tag);
     }
 
@@ -85,12 +83,15 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
     protected void init() {
 //        mIsMulti = false;
         year = getArguments().getInt("year");
+        boolean isFirst = getArguments().getBoolean("isFirst");
         LogUtil.i(" year === " + year);
 //        LogUtil.i(" widthheigth == 》》》》  " + CommonUtil.getWidthAndHeight(mActivity)[0] + "   " + CommonUtil.getWidthAndHeight(mActivity)[1] + "    " + CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
 
         LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
         banner.setLayoutParams(ll);
-        presenter = new IMainPresenter(this);
+        if(isFirst){
+            presenter.loadCourse(year);
+        }
 //        presenter.loadCourse(year);
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -161,7 +162,7 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
         list.clear();
         list.addAll(finds);
         LogUtil.i("loadFindList  "+list.toString());
-
+        adapter = null;
         if (adapter == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
             adapter = new TestAdapter(R.layout.adapter_keywords, list);

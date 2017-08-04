@@ -80,24 +80,15 @@ public class TestFragment extends BaseFragment implements IMainView {
         presenter.getData(false);
         LogUtil.i("  11111  "+Thread.currentThread().getName());
 
-        presenter.getData(false);
-        LogUtil.i("  222222  "+Thread.currentThread().getName());
-
         presenter.loadBanner();
-
-        LogUtil.i("  33333  "+Thread.currentThread().getName());
-
-        presenter.getData(false);
-        LogUtil.i("  44444  "+Thread.currentThread().getName());
-
-        presenter.getData(false);
-        LogUtil.i("  555555  "+Thread.currentThread().getName());
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 list.clear();
+                LogUtil.i(" onRefresh ");
                 presenter.getData(true);
+                presenter.loadBanner();
             }
         });
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
@@ -216,6 +207,7 @@ public class TestFragment extends BaseFragment implements IMainView {
 
     @Override
     public void loadBanner(BannerItem item) {
+        LogUtil.i(" banner   "+item.toString());
         ArrayList<String> list = new ArrayList<>();
         for(int i=0;i<4;i++){
             list.add(item.news.get(i).img_url);
@@ -225,6 +217,19 @@ public class TestFragment extends BaseFragment implements IMainView {
 //        }
         banner.setImages(list);
         banner.start();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtil.i("onStart");
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        banner.stopAutoPlay();
     }
 
     @Override

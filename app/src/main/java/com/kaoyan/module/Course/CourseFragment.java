@@ -1,5 +1,6 @@
 package com.kaoyan.module.Course;
 
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -58,50 +59,52 @@ public class CourseFragment extends BaseFragment {
     protected int attachLayoutRes() {
         return R.layout.fragment_course;
     }
-    public static String makeFragmentName(int viewId, int index) {
-        return "android:switcher:" + viewId + ":" + index;
-    }
 
     @Override
     protected void init() {
 
         for(int i=0;i<titles.length;i++){
-            list.add(new CourseListItem(CourseListFragment.newInstance(2017),2017,false));
+            if(i == 0){
+                list.add(new CourseListItem(CourseListFragment.newInstance(2017,true),2017,true));
+            }else {
+                list.add(new CourseListItem(CourseListFragment.newInstance(2017,false),2017,false));
+            }
         }
         adapter = new MyFragAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+//                LogUtil.i("onPageScrolled  "+position);
             }
 
             @Override
             public void onPageSelected(int position) {
                 mPosition = position;
-                LogUtil.i(" position = " + position + " tag ==  "+ tag );
-
-                if(!list.get(position).isShow){
-                    CourseListFragment fragment = adapter.getmCurrentFrag(mPosition);
-                    list.get(position).isShow = true;
-                    fragment.reGetData(tag);
-                    return;
-                }
-                if(list.get(position).tag != tag){
-                    CourseListFragment fragment = adapter.getmCurrentFrag(mPosition);
-                    list.get(position).tag = tag;
-                    fragment.reGetData(tag);
-                }
-
-
+//                LogUtil.i("onPageSelected  position = " + position + " tag ==  "+ tag );
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+//                LogUtil.i("onPageScrollStateChanged  "+state);
+                if(state == 0){
+                    if(!list.get(mPosition).isShow){
+                        CourseListFragment fragment = adapter.getmCurrentFrag(mPosition);
+                        list.get(mPosition).isShow = true;
+                        fragment.reGetData(tag);
+                        return;
+                    }
+                    if(list.get(mPosition).tag != tag){
+                        CourseListFragment fragment = adapter.getmCurrentFrag(mPosition);
+                        list.get(mPosition).tag = tag;
+                        fragment.reGetData(tag);
+                    }
+                }
             }
         });
     }
@@ -236,18 +239,6 @@ public class CourseFragment extends BaseFragment {
         }
     }
 
-    private void removeFragment(FragmentManager fm,ViewGroup container,int index,int flag) {
-        String tag = getFragmentTag(container.getId(), index);
-        Fragment fragment = fm.findFragmentByTag(tag);
-        if (fragment == null)
-            return;
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(container.getId(),CourseListFragment.newInstance(flag));
-        ft.commit();
-        ft = null;
-        fm.executePendingTransactions();
-    }
-
 
     private String getFragmentTag(int viewId, int index) {
         try {
@@ -263,4 +254,30 @@ public class CourseFragment extends BaseFragment {
             return "";
         }
     }
+
+    private class MyAsyncTask extends AsyncTask{
+
+        private int position;
+
+        public MyAsyncTask(int position) {
+            this.position = position;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            if(!list.get(position).isShow){
+                CourseListFragment fragment = adapter.getmCurrentFrag(mPosition);
+                list.get(position).isShow = true;
+                fragment.reGetData(tag);
+                return null;
+            }
+            if(list.get(position).tag != tag){
+                CourseListFragment fragment = adapter.getmCurrentFrag(mPosition);
+                list.get(position).tag = tag;
+                fragment.reGetData(tag);
+            }
+            return null;
+        }
+    }
+
 }

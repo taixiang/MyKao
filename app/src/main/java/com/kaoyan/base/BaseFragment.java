@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kaoyan.R;
+import com.kaoyan.utils.LogUtil;
 import com.kaoyan.widget.EmptyLayout;
 import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle.android.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import butterknife.BindView;
@@ -112,11 +115,34 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
 
     @Override
     public <T> LifecycleTransformer<T> bindToLife() {
-        return this.<T>bindToLifecycle();
+        return this.<T>bindUntilEvent(FragmentEvent.DESTROY);
     }
 
     @Override
     public void finishRefresh() {
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.i(" onResume ");
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.i(" onPause ");
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtil.i(" onStop " );
+
+    }
+
+
 }
