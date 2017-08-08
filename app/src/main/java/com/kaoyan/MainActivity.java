@@ -28,8 +28,16 @@ import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
+import io.reactivex.schedulers.Schedulers;
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 
 public class MainActivity extends BaseActivity implements IMainView{
@@ -65,6 +73,36 @@ public class MainActivity extends BaseActivity implements IMainView{
 //        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) container.getLayoutParams();
 //        params.height = outRect.bottom - outRect.top;
 //        LogUtil.i("  params  height=  "+params.height+"  window height"+ CommonUtil.getWidthAndHeight(mActivity)[1]);
+
+
+        Observable
+                .create(new Observable.OnSubscribe<String>() {
+                    @Override
+                    public void call(Subscriber<? super String> subscriber) {
+                        LogUtil.i( "rx_call" , Thread.currentThread().getName()  );
+
+                        subscriber.onNext( "dd");
+                        subscriber.onCompleted();
+                    }
+                }).map(new Func1<String, String >() {
+            @Override
+            public String call(String s) {
+                LogUtil.i( "rx_map" , Thread.currentThread().getName()  );
+                return s + "88";
+            }
+        })
+                .subscribeOn(rx.schedulers.Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        LogUtil.i( "rx_subscribe" , Thread.currentThread().getName()  );
+                    }
+                }) ;
+
+
     }
 
     private void setUpFragmentTabHost(){

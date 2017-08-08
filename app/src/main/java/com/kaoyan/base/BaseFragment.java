@@ -1,6 +1,7 @@
 package com.kaoyan.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -48,6 +49,7 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
     private View mRootView;
     protected boolean mIsMulti = false;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,6 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
         if (mRootView == null) {
             mRootView = inflater.inflate(attachLayoutRes(), null);
             ButterKnife.bind(this, mRootView);
-
         }
         ViewGroup parent = (ViewGroup) mRootView.getParent();
         if (parent != null) {
@@ -127,21 +128,18 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
     public void onResume() {
         super.onResume();
         LogUtil.i(" onResume ");
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
         LogUtil.i(" onPause ");
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
         LogUtil.i(" onStop " );
-
     }
 
 

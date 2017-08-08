@@ -31,8 +31,6 @@ public class EmptyLayout extends FrameLayout {
     private Context mContext;
     private int mEmptyStatus = STATUS_HIDE;
 
-
-
     @BindView(R.id.tvEmpty)
     TextView mTvEmptyMessage;
     @BindView(R.id.progressBar)
@@ -49,7 +47,8 @@ public class EmptyLayout extends FrameLayout {
         init();
     }
 
-    public EmptyLayout(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public EmptyLayout(@NonNull Context context, @Nullable AttributeSet attrs,
+                       @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
         init();

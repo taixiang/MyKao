@@ -12,6 +12,8 @@ import com.kaoyan.R;
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.model.FindItem;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 /**
@@ -63,7 +65,6 @@ public class FindAdapter extends BaseAdapter {
 
             holder.tv_name.setText(item.pro_name);
             holder.tv_price.setText("￥ "+item.price_sell);
-
         }
         return convertView;
     }
@@ -74,6 +75,7 @@ public class FindAdapter extends BaseAdapter {
         private TextView tv_school;
         private TextView tv_name;
         private TextView tv_price;
+
     }
 
 }

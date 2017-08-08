@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;
+import com.kaoyan.event.LoginEvent;
+import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.widget.LoadingDialog;
@@ -19,6 +21,10 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -50,17 +56,28 @@ public class MeFragment extends BaseFragment {
     @Override
     protected void init() {
         ImgManager.loadImage(mActivity,"http://m.iisbn.com/images_side/1.jpg",imageView);
+        EventBus.getDefault().register(this);
+        LogUtil.i(" EventBus  "+EventBus.getDefault().toString());
 
 //        RequestBody requestBody = RequestBody.create()
 //        MultipartBody.Part body = MultipartBody.Part.createFormData();
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtil.i(" EventBus  "+EventBus.getDefault().toString());
+
+            EventBus.getDefault().unregister(this);
     }
 
     @OnClick(R.id.iv_circle)
     void startImg(){
-        Intent intent = new Intent(mActivity, ImageGridActivity.class);
-        startActivityForResult(intent, 1);
+//        Intent intent = new Intent(mActivity, ImageGridActivity.class);
+//        startActivityForResult(intent, 1);
 
+        Intent intent = new Intent(mActivity, Test2Activity.class);
+        startActivity(intent);
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 //        intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -102,6 +119,11 @@ public class MeFragment extends BaseFragment {
             LogUtil.i(" file path == "+path);
             ImgManager.loadImage(mActivity,file,iv);
         }
+    }
+
+    @Subscribe
+    public void LoginEvent(LoginEvent loginEvent){
+        LogUtil.i(" loginSuccess ");
     }
 
     public String getAbsolutePath(final Context context, final Uri uri) {

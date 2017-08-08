@@ -17,6 +17,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kaoyan.R;
 import com.kaoyan.adapter.BannerAdapter;
 import com.kaoyan.adapter.TestAdapter2;
+import com.kaoyan.api.RetrofitService;
+import com.kaoyan.base.BaseActivity;
 import com.kaoyan.model.BannerItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.adapter.TestAdapter;
@@ -73,7 +75,6 @@ public class TestFragment extends BaseFragment implements IMainView {
     protected void init() {
 //        mIsMulti = false;
         LogUtil.i(" widthheigth == 》》》》  " + CommonUtil.getWidthAndHeight(mActivity)[0] + "   " + CommonUtil.getWidthAndHeight(mActivity)[1] + "    " + CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
-
         LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
         banner.setLayoutParams(ll);
         presenter = new IMainPresenter(this);
@@ -81,7 +82,7 @@ public class TestFragment extends BaseFragment implements IMainView {
         LogUtil.i("  11111  "+Thread.currentThread().getName());
 
         presenter.loadBanner();
-
+        refreshLayout.setEnableRefresh(false);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -126,15 +127,6 @@ public class TestFragment extends BaseFragment implements IMainView {
             }
         });
 
-
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-
-        LogUtil.i("baseFragment 》》》》》 test  super.setUserVisibleHint   after");
 
     }
 
@@ -241,7 +233,10 @@ public class TestFragment extends BaseFragment implements IMainView {
     @Override
     public void loadNoData() {
         super.loadNoData();
+        refreshLayout.finishRefresh();
         refreshLayout.finishLoadmore();
+        refreshLayout.setEnableRefresh(true);
+
     }
 
 }

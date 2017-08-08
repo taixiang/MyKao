@@ -1,6 +1,9 @@
 package com.kaoyan.module;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +22,7 @@ import com.kaoyan.adapter.TestCustomAdapter;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.BaseActivity;
 import com.kaoyan.base.BaseApplication;
+import com.kaoyan.event.LoginEvent;
 import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
@@ -34,8 +38,15 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,6 +64,11 @@ public class Test2Activity extends BaseActivity implements IMainView{
     TextView btn;
     @BindView(R.id.tv_search_bg)
     EditText search;
+    @BindView(R.id.tv_timer)
+    TextView tv_timer;
+    Timer timer = new Timer();
+    long t = 100;
+    long dis ;
 
     private IMainPresenter p = new IMainPresenter(this);
     private FindAdapter adapter;
@@ -67,7 +83,10 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     @OnClick(R.id.btn)
     void click(){
-        p.login();
+//        p.login();
+        LogUtil.i(" EventBus  "+EventBus.getDefault().toString());
+        EventBus.getDefault().post(new LoginEvent());
+        finish();
     }
 
     @Override
@@ -97,7 +116,24 @@ public class Test2Activity extends BaseActivity implements IMainView{
     protected void init() {
         setTitle("标题");
         goBack();
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            format.format(new Date()); //date转string
+            Date date = format.parse("2017-08-08 17:35:00"); //string转date
+            long t1 = date.getTime();
+            LogUtil.i("  timer t1 ===  "+t1);
+            date = format.parse("2017-08-08 17:35:10");
+            long t2 = date.getTime();
+            LogUtil.i("  timer t2 ===  "+t2);
+            dis = t2 -t1;
+            LogUtil.i("  timer dis ===  "+dis);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 //        p.getData(false);
+        timer.schedule(task, 0,1000);
 
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -120,6 +156,51 @@ public class Test2Activity extends BaseActivity implements IMainView{
                 ToastUtils.showToast(Test2Activity.this,""+position);
             }
         });
+    }
+
+    private void getDiff(){
+        if(dis <= 0){
+            tv_timer.setText(0 + "天" + 0+"小时"+ 0+"分"+0+"秒");
+            if(timer != null && task != null){
+                timer.cancel();
+                task.cancel();
+            }
+            return;
+        }
+        dis-=1000;
+        LogUtil.i("  getDiff dis "+dis);
+        long day = dis / (24 * 60 * 60 * 1000);
+        long hour = (dis / (60 * 60 * 1000) - day * 24);
+        long min = ((dis / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        long s = (dis / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        tv_timer.setText(day + "天" + hour+"小时"+ min+"分"+s+"秒");
+    }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+
+            getDiff();
+        }
+    };
+
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(0);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(task != null){
+            task.cancel();
+        }
+        if(timer != null){
+            timer.cancel();
+        }
+
     }
 
     @Override

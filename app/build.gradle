@@ -26,6 +26,10 @@ android {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
 
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
     greendao{
         schemaVersion 1
 //            targetGenDir 'src/main/java'
@@ -43,8 +47,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     //rxjava
-    compile 'io.reactivex:rxjava:1.1.9'
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -54,8 +58,8 @@ dependencies {
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
     //smartrefresh
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-6'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3-alpha-6'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+
     //butterknife
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'

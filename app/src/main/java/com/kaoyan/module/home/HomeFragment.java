@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,11 +16,16 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.kaoyan.R;
 import com.kaoyan.adapter.HomeCategoryAdapter;
 import com.kaoyan.base.BaseFragment;
+import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.DensityUtil;
 import com.kaoyan.utils.ImgManager;
+import com.kaoyan.utils.NetUtil;
 import com.kaoyan.widget.CustomGridView;
 import com.kaoyan.widget.CustomListView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.youth.banner.Banner;
 
 import butterknife.BindView;
@@ -31,6 +37,8 @@ import butterknife.BindView;
 
 public class HomeFragment extends BaseFragment {
 
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.gv_category)
@@ -57,6 +65,13 @@ public class HomeFragment extends BaseFragment {
         initBanner();
         initCategory();
         initAct();
+        NetUtil.isNetworkAvailable(mActivity);
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+
+            }
+        });
     }
 
     /**
@@ -73,6 +88,15 @@ public class HomeFragment extends BaseFragment {
      */
     private void initCategory() {
         gvCategory.setAdapter(new HomeCategoryAdapter(categoryName, mActivity));
+        gvCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(CommonUtil.isfastdoubleClick()){
+                    return;
+                }
+                Test2Activity.actTo2(mActivity);
+            }
+        });
     }
 
     /**

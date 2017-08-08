@@ -72,7 +72,7 @@ public class RetrofitService {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
-//                .addInterceptor(interceptor)
+                .addInterceptor(interceptor)
 //                .addInterceptor(tokenInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .build();
@@ -110,7 +110,6 @@ public class RetrofitService {
                 LogUtil.i("  threadname doOnSubscribe =="+Thread.currentThread().getName());
             }
         }).compose(l).subscribe(subscriber);
-
     }
 
     public static <T> void mergeSub(Subscriber<T> subscriber,LifecycleTransformer<T> l,Observable<BaseItem<T>>... tt){
@@ -134,7 +133,7 @@ public class RetrofitService {
 //            if(tHttpBean.result.equals("true")){
 //                throw new ApiException(1);
 //            }
-//            LogUtil.i(" httpBean ==   "+tHttpBean);
+            LogUtil.i(" httpBean ==   "+tHttpBean);
 //
 //            LogUtil.i("  threadname ResultFilter== "+Thread.currentThread().getName());
 

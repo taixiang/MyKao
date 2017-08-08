@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import java.io.IOException;
+
 /**
  * Created by tx on 2017/7/17.
  * NetWork Utils
@@ -142,7 +144,7 @@ public class NetUtil {
      * @param context
      * @return 网络是否可用
      */
-    public static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkConnected(Context context) {
         try {
             ConnectivityManager cm =
                     (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -153,6 +155,22 @@ public class NetUtil {
         }
         return false;
     }
+
+    public static boolean isNetworkAvailable(Context context){
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            Process process =  runtime.exec("ping -c 1 www.baidu.com");
+            int code = process.waitFor();
+            LogUtil.i(" netCode = "+code);
+            return code==0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     /**
      * 判断WIFI网络是否可用
