@@ -54,7 +54,7 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
     private TestAdapter adapter;
     //    private TestAdapter2 adapter2;
     private ArrayList<FindItem.Find> list = new ArrayList<>();
-      int year;
+    int year;
 
     public static CourseListFragment newInstance(int year,boolean isFirst){
         CourseListFragment fragment = new CourseListFragment();
@@ -135,13 +135,6 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
 
             }
         });
-
-
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
     }
 
     @Override

@@ -73,11 +73,11 @@ public class MeFragment extends BaseFragment {
 
     @OnClick(R.id.iv_circle)
     void startImg(){
-//        Intent intent = new Intent(mActivity, ImageGridActivity.class);
-//        startActivityForResult(intent, 1);
+        Intent intent = new Intent(mActivity, ImageGridActivity.class);
+        startActivityForResult(intent, 1);
 
-        Intent intent = new Intent(mActivity, Test2Activity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(mActivity, Test2Activity.class);
+//        startActivity(intent);
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 //        intent.setAction(Intent.ACTION_GET_CONTENT);

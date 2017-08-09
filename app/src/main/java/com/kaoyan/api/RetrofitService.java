@@ -54,7 +54,7 @@ public class RetrofitService {
     private static final String CACHE_CONTROL_CACHE = "only-if-cached, max-stale=" + CACHE_STALE_SEC;
 
     private static final String BASE_URL = "http://m.iisbn.com/";
-    private static final String URL = "http://www.iisbn.com/";
+    private static final String URL = "http://www.mocky.io/";
     public static IApi msgApi;
     public static CommonApi commonApi;
 
@@ -99,12 +99,17 @@ public class RetrofitService {
         }
     };
 
-    public static <T> void toSub(Observable<BaseItem<T>> ob,Subscriber<T> subscriber,LifecycleTransformer<T> l){
+    public static <T> void toSub(Observable<BaseItem<T>> ob,Subscriber<T> subscriber,LifecycleTransformer <T> l){
         ob.subscribeOn(Schedulers.io())
 //                .unsubscribeOn(Schedulers.io())
 //                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new ResultFilter<T>()).doOnSubscribe(new Action0() {
+                .flatMap(new Func1<BaseItem<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(BaseItem<T> tBaseItem) {
+                        return Observable.just(tBaseItem.pros);
+                    }
+                }).doOnSubscribe(new Action0() {
             @Override
             public void call() {
                 LogUtil.i("  threadname doOnSubscribe =="+Thread.currentThread().getName());
@@ -122,7 +127,6 @@ public class RetrofitService {
             @Override
             public void call() {
 //                LogUtil.i("  threadname == "+Thread.currentThread().getName());
-
             }
         }).compose(l).subscribe(subscriber);
     }

@@ -15,11 +15,15 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.kaoyan.R;
 import com.kaoyan.adapter.HomeCategoryAdapter;
+import com.kaoyan.api.IApi;
+import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.BaseFragment;
+import com.kaoyan.model.TestItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.DensityUtil;
 import com.kaoyan.utils.ImgManager;
+import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.NetUtil;
 import com.kaoyan.widget.CustomGridView;
 import com.kaoyan.widget.CustomListView;
@@ -29,6 +33,9 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.youth.banner.Banner;
 
 import butterknife.BindView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by tx on 2017/7/25.
@@ -65,7 +72,7 @@ public class HomeFragment extends BaseFragment {
         initBanner();
         initCategory();
         initAct();
-        NetUtil.isNetworkAvailable(mActivity);
+//        NetUtil.isNetworkAvailable(mActivity);
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {

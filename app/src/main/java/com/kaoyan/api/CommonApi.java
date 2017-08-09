@@ -4,6 +4,7 @@ import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.LoginItem;
+import com.kaoyan.model.TestItem;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -32,5 +33,11 @@ public interface CommonApi {
 
     @GET("API/Default.ashx?action=news_side")
     Observable<BannerItem> getBanner();
+
+    @GET("v2/598ab894110000b100515cc6")
+    Observable<BaseItem<TestItem>> getTestItem();
+
+    @GET("v2/598ab678110000c700515cc0")
+    Observable<TestItem> getTestItem2();
 
 }

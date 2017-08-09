@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,8 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.view.KeyEvent.KEYCODE_NOTIFICATION;
 
 /**
  * Created by tx on 2017/7/17.
@@ -225,4 +228,22 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
             getSupportFragmentManager().popBackStack(tag, 0);
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode){
+            case KeyEvent.KEYCODE_HOME:return true;
+//            case KeyEvent.KEYCODE_BACK:return true;
+            case KeyEvent.KEYCODE_CALL:return true;
+            case KeyEvent.KEYCODE_SYM: return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN: return true;
+            case KeyEvent.KEYCODE_VOLUME_UP: return true;
+            case KeyEvent.KEYCODE_STAR: return true;
+            case KeyEvent.KEYCODE_SETTINGS:return true;
+            case KeyEvent.KEYCODE_MENU:return true;
+            case KeyEvent.KEYCODE_NOTIFICATION:return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

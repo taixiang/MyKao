@@ -23,7 +23,7 @@ public class ImgManager {
 
     public static void loadImage(Context context, String url, ImageView iv) {
 
-        Glide.with(context).load(url).skipMemoryCache(true).dontAnimate().error(R.mipmap.ic_launcher).into(iv);
+        Glide.with(context).load(url).dontAnimate().error(R.mipmap.ic_launcher).into(iv);
     }
 
     public static void loadImageWithNoAnim(Context context, String url, ImageView iv){

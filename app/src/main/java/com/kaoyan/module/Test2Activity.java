@@ -47,15 +47,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 
 /**
  * Created by tx on 2017/7/19.
  */
 
-public class Test2Activity extends BaseActivity implements IMainView{
+public class Test2Activity extends BaseActivity implements IMainView {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.listView)
@@ -68,7 +73,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
     TextView tv_timer;
     Timer timer = new Timer();
     long t = 100;
-    long dis ;
+    long dis;
 
     private IMainPresenter p = new IMainPresenter(this);
     private FindAdapter adapter;
@@ -76,22 +81,22 @@ public class Test2Activity extends BaseActivity implements IMainView{
     //    private TestAdapter2 adapter2;
     private LinkedList<FindItem.Find> list = new LinkedList<>();
 
-    public static void actTo2(BaseActivity activity){
-        Intent intent = new Intent(activity,Test2Activity.class);
+    public static void actTo2(BaseActivity activity) {
+        Intent intent = new Intent(activity, Test2Activity.class);
         activity.startActivity(intent);
     }
 
     @OnClick(R.id.btn)
-    void click(){
+    void click() {
 //        p.login();
-        LogUtil.i(" EventBus  "+EventBus.getDefault().toString());
+        LogUtil.i(" EventBus  " + EventBus.getDefault().toString());
         EventBus.getDefault().post(new LoginEvent());
         finish();
     }
 
     @Override
     public void loadNoData() {
-        Log.i("》》》 "," loadnodata  ==== ");
+        Log.i("》》》 ", " loadnodata  ==== ");
         refreshLayout.finishLoadmore();
     }
 
@@ -101,15 +106,15 @@ public class Test2Activity extends BaseActivity implements IMainView{
     }
 
     @OnClick(R.id.tv_search_bg)
-    void search(){
-        Intent intent = new Intent(this,TestActivity3.class);
+    void search() {
+        Intent intent = new Intent(this, TestActivity3.class);
         int location[] = new int[2];
         search.getLocationOnScreen(location);
-        LogUtil.i("location  x= "+location[0]+"  y= "+location[1]);
-        intent.putExtra("x",location[0]);
-        intent.putExtra("y",location[1]);
+        LogUtil.i("location  x= " + location[0] + "  y= " + location[1]);
+        intent.putExtra("x", location[0]);
+        intent.putExtra("y", location[1]);
         startActivity(intent);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -122,18 +127,48 @@ public class Test2Activity extends BaseActivity implements IMainView{
             format.format(new Date()); //date转string
             Date date = format.parse("2017-08-08 17:35:00"); //string转date
             long t1 = date.getTime();
-            LogUtil.i("  timer t1 ===  "+t1);
-            date = format.parse("2017-08-08 17:35:10");
+            LogUtil.i("  timer t1 ===  " + t1);
+            date = format.parse("2017-08-09 17:35:10");
             long t2 = date.getTime();
-            LogUtil.i("  timer t2 ===  "+t2);
-            dis = t2 -t1;
-            LogUtil.i("  timer dis ===  "+dis);
+            LogUtil.i("  timer t2 ===  " + t2);
+            dis = t2 - t1;
+            LogUtil.i("  timer dis ===  " + dis);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        Observable.interval(0, 1, TimeUnit.SECONDS)
+                .take((int) (dis / 1000)+1).map(new Func1<Long, Long>() {
+            @Override
+            public Long call(Long aLong) {
+                LogUtil.i(" call  long   " + aLong);
+
+                return dis - aLong *1000;
+            }
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<Long>bindToLife())
+                .subscribe(new Subscriber<Long>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        LogUtil.i(" onNext  long   " + aLong);
+                        getDiff(aLong);
+                    }
+                });
+
+
 //        p.getData(false);
-        timer.schedule(task, 0,1000);
+//        timer.schedule(task, 0,1000);
 
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -153,34 +188,39 @@ public class Test2Activity extends BaseActivity implements IMainView{
         recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtils.showToast(Test2Activity.this,""+position);
+                ToastUtils.showToast(Test2Activity.this, "" + position);
             }
         });
     }
 
-    private void getDiff(){
-        if(dis <= 0){
-            tv_timer.setText(0 + "天" + 0+"小时"+ 0+"分"+0+"秒");
-            if(timer != null && task != null){
+    private void getDiff(long dis) {
+        if (dis <=0) {
+            tv_timer.setText(0 + "天" + 0 + "小时" + 0 + "分" + 0 + "秒");
+            if (timer != null && task != null) {
                 timer.cancel();
                 task.cancel();
             }
             return;
         }
-        dis-=1000;
-        LogUtil.i("  getDiff dis "+dis);
+        LogUtil.i("  getDiff dis " + dis);
         long day = dis / (24 * 60 * 60 * 1000);
+        String dayStr = day<10 ? "0"+day : ""+day;
         long hour = (dis / (60 * 60 * 1000) - day * 24);
+        String hourStr = hour<10 ? "0"+hour : ""+hour;
         long min = ((dis / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        String minStr = min<10 ? "0"+min : ""+min;
         long s = (dis / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-        tv_timer.setText(day + "天" + hour+"小时"+ min+"分"+s+"秒");
+        String secStr = s<10 ? "0"+s : ""+s;
+
+        tv_timer.setText(dayStr + "天" + hourStr + "小时" + minStr + "分" + secStr + "秒");
+//        dis -= 1000;
     }
 
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg){
+        public void handleMessage(Message msg) {
 
-            getDiff();
+//            getDiff();
         }
     };
 
@@ -194,10 +234,10 @@ public class Test2Activity extends BaseActivity implements IMainView{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(task != null){
+        if (task != null) {
             task.cancel();
         }
-        if(timer != null){
+        if (timer != null) {
             timer.cancel();
         }
 
@@ -211,20 +251,20 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     @Override
     public void loadData(HomeMiddleItem middleItem) {
-        LogUtil.i(" middleItem "," 》》》》  "+middleItem.toString());
+        LogUtil.i(" middleItem ", " 》》》》  " + middleItem.toString());
     }
 
     @Override
     public void loadNovel(FindItem item) {
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadmore();
-        list.addAll((List<FindItem.Find>)item.pros1);
-        Log.i("》》》》》  "," list ====  "+list.size());
-        if(adapter2 == null){
+        list.addAll((List<FindItem.Find>) item.pros1);
+        Log.i("》》》》》  ", " list ====  " + list.size());
+        if (adapter2 == null) {
 //            adapter = new FindAdapter(list,this);
-            adapter2 = new TestCustomAdapter(this,list,R.layout.adapter_keywords);
+            adapter2 = new TestCustomAdapter(this, list, R.layout.adapter_keywords);
             recyclerView.setAdapter(adapter2);
-        }else {
+        } else {
             adapter2.notifyDataSetChanged();
         }
     }
@@ -232,12 +272,12 @@ public class Test2Activity extends BaseActivity implements IMainView{
     @Override
     public void loadFindList(List<FindItem.Find> finds) {
         list.addAll(finds);
-        Log.i("》》》》》  "," list ====  "+list.size());
-        if(adapter2 == null){
+        Log.i("》》》》》  ", " list ====  " + list.size());
+        if (adapter2 == null) {
 //            adapter = new FindAdapter(list,this);
-            adapter2 = new TestCustomAdapter(this,list,R.layout.adapter_keywords);
+            adapter2 = new TestCustomAdapter(this, list, R.layout.adapter_keywords);
             recyclerView.setAdapter(adapter2);
-        }else {
+        } else {
             adapter2.notifyDataSetChanged();
         }
     }
@@ -252,7 +292,7 @@ public class Test2Activity extends BaseActivity implements IMainView{
 
     }
 
-    private void stopRefreshAndLoad(){
+    private void stopRefreshAndLoad() {
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadmore();
     }

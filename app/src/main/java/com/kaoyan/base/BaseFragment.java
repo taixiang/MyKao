@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,19 +128,19 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
     @Override
     public void onResume() {
         super.onResume();
-        LogUtil.i(" onResume ");
+//        LogUtil.i(" onResume ");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtil.i(" onPause ");
+//        LogUtil.i(" onPause ");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LogUtil.i(" onStop " );
+//        LogUtil.i(" onStop " );
     }
 
 
