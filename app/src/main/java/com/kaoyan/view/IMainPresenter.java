@@ -35,7 +35,7 @@ public class IMainPresenter implements LoginPresenter {
 
     public IMainPresenter(IMainView mView) {
         this.mView = mView;
-        t =  RetrofitService.msgApi.getFind(page);
+
     }
 
     @Override
@@ -199,6 +199,7 @@ public class IMainPresenter implements LoginPresenter {
             page =2;
         }
         mView.showLoading();
+        Observable t =  RetrofitService.msgApi.getFind(page);
         LogUtil.i(" unsubscribe t= "+t.toString());
 
         RetrofitService.toSub(t, new Subscriber<List<FindItem.Find>>() {
@@ -247,13 +248,14 @@ public class IMainPresenter implements LoginPresenter {
 //            }
 //        });
     }
-    Observable t;
+
     private void doGetFind(){
 
 //        if(!t.subscribe().isUnsubscribed()){
 //            t.subscribe().unsubscribe();
 //            LogUtil.i(" ====unsubscribe  ===");
 //        }
+        Observable t =  RetrofitService.msgApi.getFind(page);
         LogUtil.i(" unsubscribe t= "+t.toString());
 
         RetrofitService.toSub(t, new Subscriber<List<FindItem.Find>>() {

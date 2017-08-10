@@ -72,6 +72,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(attachLayoutRes() == 0){
+            finish();
+            return;
+        }
         setContentView(attachLayoutRes());
         ButterKnife.bind(this);
         mActivity = this;

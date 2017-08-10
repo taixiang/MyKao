@@ -68,7 +68,7 @@ public class MeFragment extends BaseFragment {
         super.onDestroy();
         LogUtil.i(" EventBus  "+EventBus.getDefault().toString());
 
-            EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick(R.id.iv_circle)

@@ -49,11 +49,11 @@ public class ExampleInstrumentedTest
     @Test
     public void test(){
         Context appContext = InstrumentationRegistry.getTargetContext();
-        Intent intent = new Intent(appContext,Test2Activity.class);
+        Intent intent = new Intent(appContext,MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         appContext.startActivity(intent);
 //        onView(withId(R.id.btn)).check(matches(isDisplayed()));
-//        onView(withId(R.id.btn)).perform(click());
+        onView(withId(R.id.iv_circle)).perform(click());
 
     }
 

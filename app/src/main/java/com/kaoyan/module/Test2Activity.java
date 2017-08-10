@@ -151,7 +151,6 @@ public class Test2Activity extends BaseActivity implements IMainView {
                 .subscribe(new Subscriber<Long>() {
                     @Override
                     public void onCompleted() {
-
                     }
 
                     @Override

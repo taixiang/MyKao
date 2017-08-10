@@ -46,7 +46,7 @@ public class ImgManager {
 
 
     public static void loadImage(Context context, final File file, final ImageView imageView) {
-        Glide.with(context).load(file).into(imageView);
+        Glide.with(context).load(file).skipMemoryCache(true).into(imageView);
     }
 
     public static void loadImage(Context context, final int resourceId, final ImageView imageView) {

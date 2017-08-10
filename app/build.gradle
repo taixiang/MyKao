@@ -11,14 +11,24 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-//        debug{
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
+    signingConfigs {
         release {
+            storeFile file('ky.jks')
+            storePassword '111111'
+            keyAlias '111111'
+            keyPassword '111111'
+        }
+    }
+    buildTypes {
+        debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -80,4 +90,6 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.5.5'
     //eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
+    //blockcanary
+    compile 'com.github.markzhai:blockcanary-android:1.5.0'
 }

@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="windowNoTitle">true</item>-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowBackground">@mipmap/ic_launcher</item>-->
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Style</item>
     </style>
 
@@ -19,22 +22,26 @@
 
     <!--默认Activity页面切换样式-->
     <style name="Animation.Activity.Style" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/base_slide_right_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/base_stay_orig</item>
-        <item name="android:activityCloseEnterAnimation">@anim/base_stay_orig</item>
-        <item name="android:activityCloseExitAnimation">@anim/base_slide_right_out</item>
-        <item name="android:taskOpenEnterAnimation">@anim/base_slide_right_in</item>
-        <item name="android:taskOpenExitAnimation">@anim/base_stay_orig</item>
-        <item name="android:taskCloseEnterAnimation">@anim/base_stay_orig</item>
-        <item name="android:taskCloseExitAnimation">@anim/base_slide_right_out</item>
-        <item name="android:taskToFrontEnterAnimation">@anim/base_slide_right_in</item>
-        <item name="android:taskToFrontExitAnimation">@anim/base_stay_orig</item>
-        <item name="android:taskToBackEnterAnimation">@anim/base_stay_orig</item>
-        <item name="android:taskToBackExitAnimation">@anim/base_slide_right_out</item>
-        <item name="android:fragmentOpenEnterAnimation">@anim/base_slide_right_in</item>
-        <item name="android:fragmentOpenExitAnimation">@anim/base_stay_orig</item>
-        <item name="android:fragmentCloseEnterAnimation">@anim/base_stay_orig</item>
-        <item name="android:fragmentCloseExitAnimation">@anim/base_slide_right_out</item>
+        <item name="android:activityOpenEnterAnimation">@anim/right_in</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/base_stay_orig</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/base_stay_orig</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>
+        <item name="android:taskOpenEnterAnimation">@anim/right_in</item>
+        <!--<item name="android:taskOpenExitAnimation">@anim/base_stay_orig</item>-->
+        <!--<item name="android:taskCloseEnterAnimation">@anim/base_stay_orig</item>-->
+        <item name="android:taskCloseExitAnimation">@anim/right_out</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/right_in</item>
+        <!--<item name="android:taskToFrontExitAnimation">@anim/base_stay_orig</item>-->
+        <!--<item name="android:taskToBackEnterAnimation">@anim/base_stay_orig</item>-->
+        <item name="android:taskToBackExitAnimation">@anim/right_out</item>
+        <item name="android:fragmentOpenEnterAnimation">@anim/right_in</item>
+        <!--<item name="android:fragmentOpenExitAnimation">@anim/base_stay_orig</item>-->
+        <!--<item name="android:fragmentCloseEnterAnimation">@anim/base_stay_orig</item>-->
+        <item name="android:fragmentCloseExitAnimation">@anim/right_out</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
     </style>
 
 </resources>

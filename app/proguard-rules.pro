@@ -113,3 +113,18 @@ public static java.lang.String TABLENAME;
   **[] $VALUES;
   public *;
 }
+
+#eventBus
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
+
+-keep class com.kaoyan.model.** {*;}
+
+-dontwarn org.codehaus.**
+-dontwarn java.nio.**

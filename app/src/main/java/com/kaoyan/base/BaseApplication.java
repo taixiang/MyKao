@@ -5,11 +5,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import com.github.moduth.blockcanary.BlockCanary;
 import com.kaoyan.BuildConfig;
 import com.kaoyan.R;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.database.DaoMaster;
 import com.kaoyan.database.DaoSession;
+import com.kaoyan.utils.AppBlockCanaryContext;
 import com.kaoyan.utils.CrashHandler;
 import com.kaoyan.utils.GreenDaoManager;
 import com.kaoyan.utils.ImagePickerLoader;
@@ -42,10 +44,11 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             LeakCanary.install(this);
+            BlockCanary.install(this,new AppBlockCanaryContext()).start();
             LogUtil.isDebug = true;
-        }
+//        }
         RetrofitService.init(this);
         GreenDaoManager.getInstance(this);
         initSmartRefreshLayout();
