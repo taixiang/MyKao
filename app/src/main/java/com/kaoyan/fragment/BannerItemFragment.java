@@ -37,12 +37,6 @@ import butterknife.OnClick;
 
 public class BannerItemFragment extends BaseFragment {
 
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_banner,null);
-//    }
-
     private String imgUrl;
     private UserDao userDao;
 
@@ -66,7 +60,7 @@ public class BannerItemFragment extends BaseFragment {
     }
 
     @OnClick(R.id.insert)
-    void inser(){
+    void insert(){
         i++;
         User user = new User(null,i+""," "+i);
         userDao.insert(user);
@@ -98,11 +92,14 @@ public class BannerItemFragment extends BaseFragment {
         List<User> list = userDao.queryBuilder().orderDesc(UserDao.Properties.Id).list();
         LogUtil.i("userList === "+list.toString());
 
-        list.get(0).setName("4444444");
-        userDao.update(list.get(0));
+        if( list.size() > 0){
+            list.get(0).setName("4444444");
+            userDao.update(list.get(0));
 //        GreenDaoManager.getInstance(mActivity).getDaosession().clear();
-        List<User> list2 = userDao.queryBuilder().orderDesc(UserDao.Properties.Id).list();
-        LogUtil.i("userList2 === "+list.toString());
+            List<User> list2 = userDao.queryBuilder().orderDesc(UserDao.Properties.Id).list();
+            LogUtil.i("userList2 === "+list.toString());
+        }
+
 
     }
 

@@ -1,7 +1,9 @@
 package com.kaoyan.module.splash;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 
 import com.kaoyan.MainActivity;
 import com.kaoyan.R;
@@ -17,6 +19,7 @@ import com.kaoyan.utils.SharedPreferencesUtil;
 public class SplashActivity extends BaseActivity {
     @Override
     protected int attachLayoutRes() {
+        this.setTheme(R.style.AppTheme);
         boolean isFirst = (boolean) SharedPreferencesUtil.get(SplashActivity.this,GuideActivity.ISFIRST,false);
         if(!isFirst){
             Intent intent= new Intent(SplashActivity.this,GuideActivity.class);
@@ -24,6 +27,11 @@ public class SplashActivity extends BaseActivity {
             return 0;
         }
         return R.layout.activity_splash;
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     @Override

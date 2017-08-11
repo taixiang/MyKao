@@ -29,14 +29,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.Test2Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".module.TestActivity3"  android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.Test2Activity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".module.TestActivity3"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ImagePickerThemeFullScreen"/>
-        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".module.guide.GuideActivity" android:screenOrientation="portrait" android:theme="@style/SplashTheme"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".module.guide.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/GuideTheme"/>
     </application>
 
 </manifest>

@@ -42,7 +42,7 @@ import butterknife.BindView;
  * Created by tx on 2017/8/3.
  */
 
-public class CourseListFragment extends BaseFragment  implements IMainView {
+public class CourseListFragment extends BaseFragment implements IMainView {
 
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
@@ -56,11 +56,11 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
     private ArrayList<FindItem.Find> list = new ArrayList<>();
     int year;
 
-    public static CourseListFragment newInstance(int year,boolean isFirst){
+    public static CourseListFragment newInstance(int year, boolean isFirst) {
         CourseListFragment fragment = new CourseListFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("year",year);
-        bundle.putBoolean("isFirst",isFirst);
+        bundle.putInt("year", year);
+        bundle.putBoolean("isFirst", isFirst);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -69,7 +69,7 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
         this.year = year;
     }
 
-    public void reGetData(int tag){
+    public void reGetData(int tag) {
         LogUtil.i(" tag === " + tag);
         presenter.loadCourse(tag);
     }
@@ -89,7 +89,7 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
 
         LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommonUtil.getWidthAndHeight(mActivity)[0] * 2 / 5);
         banner.setLayoutParams(ll);
-        if(isFirst){
+        if (isFirst) {
             presenter.loadCourse(year);
         }
 //        presenter.loadCourse(year);
@@ -154,7 +154,7 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
         refreshLayout.finishLoadmore();
         list.clear();
         list.addAll(finds);
-        LogUtil.i("loadFindList  "+list.toString());
+        LogUtil.i("loadFindList  " + list.toString());
         adapter = null;
         if (adapter == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
@@ -179,7 +179,7 @@ public class CourseListFragment extends BaseFragment  implements IMainView {
     @Override
     public void loadBanner(BannerItem item) {
         ArrayList<String> list = new ArrayList<>();
-        for(int i=0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
             list.add(item.news.get(i).img_url);
         }
 //        for (BannerItem.News banner : item.news ) {

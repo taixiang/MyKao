@@ -41,7 +41,7 @@ android {
     }
 
     greendao{
-        schemaVersion 1
+        schemaVersion 2
 //            targetGenDir 'src/main/java'
     }
 }
@@ -69,7 +69,7 @@ dependencies {
     compile 'com.trello:rxlifecycle-components:1.0'
     //smartrefresh
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
-
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
     //butterknife
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'

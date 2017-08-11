@@ -21,6 +21,7 @@ import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.module.Course.CourseFragment;
+import com.kaoyan.module.act.ActFragment;
 import com.kaoyan.module.home.HomeFragment;
 import com.kaoyan.module.me.MeFragment;
 import com.kaoyan.utils.CommonUtil;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity implements IMainView{
 
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class,CourseFragment.class,TestFragment.class,MeFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class,CourseFragment.class,ActFragment.class,MeFragment.class};
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.selector_tab_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};
@@ -161,6 +162,12 @@ public class MainActivity extends BaseActivity implements IMainView{
 
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        exit();
+    }
+
     private void exit(){
         if(System.currentTimeMillis() - exitTime > 2000){
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
@@ -168,6 +175,7 @@ public class MainActivity extends BaseActivity implements IMainView{
             exitTime = System.currentTimeMillis();
         }else {
             finish();
+            System.exit(0);
         }
     }
 }
