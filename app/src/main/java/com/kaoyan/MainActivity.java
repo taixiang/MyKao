@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity implements IMainView{
 //        EventBus.getDefault().register(this);
 
           setUpFragmentTabHost();
+        LogUtil.i(" init   ");
 //        Rect outRect = new Rect();
 //        getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect);
 //        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) container.getLayoutParams();
