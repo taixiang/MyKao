@@ -1,5 +1,7 @@
 package com.kaoyan.module.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.kaoyan.adapter.HomeCategoryAdapter;
 import com.kaoyan.api.IApi;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.BaseFragment;
+import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.TestItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.CommonUtil;
@@ -31,6 +34,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import rx.Subscriber;
@@ -42,7 +48,7 @@ import rx.schedulers.Schedulers;
  * 首页Fragment
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeView {
 
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
@@ -57,6 +63,7 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.lv_recommend)
     CustomListView lvRecommend;
     private int width;
+    private HomePresenter presenter = new HomePresenter(this);
 
     private String[] categoryName = {"蜕变计划", "VIP协议班", "公共课联报", "公共课1对1", "考研英语", "考研政治", "考研数学", "全部分类"};
     private int[] categoryImg = {};
@@ -73,6 +80,7 @@ public class HomeFragment extends BaseFragment {
         initCategory();
         initAct();
 //        NetUtil.isNetworkAvailable(mActivity);
+//        refreshLayout.setHeaderHeight(20);
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
@@ -88,6 +96,13 @@ public class HomeFragment extends BaseFragment {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, width * 2 / 5);
         banner.setLayoutParams(params);
+        banner.setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+                ImgManager.loadImage(context, (String) path, imageView);
+            }
+        });
+        presenter.getData(false);
     }
 
     /**
@@ -101,9 +116,22 @@ public class HomeFragment extends BaseFragment {
                 if(CommonUtil.isfastdoubleClick()){
                     return;
                 }
-                Test2Activity.actTo2(mActivity);
+                Intent intent = new Intent(mActivity, Test2Activity.class);
+                mActivity.startActivityForResult(intent,98);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        banner.stopAutoPlay();
     }
 
     /**
@@ -146,4 +174,26 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void showBanner(BannerItem bannerItem) {
+        ArrayList<String> list = new ArrayList<>();
+        for(int i=0;i<4;i++){
+            list.add(bannerItem.news.get(i).img_url);
+        }
+//        for (BannerItem.News banner : item.news ) {
+//            list.add(banner.img_url);
+//        }
+        banner.setImages(list);
+        banner.start();
+    }
+
+    @Override
+    public void showLimitAct() {
+
+    }
+
+    @Override
+    public void showRecommendCourse() {
+
+    }
 }

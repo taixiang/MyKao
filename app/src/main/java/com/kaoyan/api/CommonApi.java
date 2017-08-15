@@ -4,14 +4,18 @@ import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.LoginItem;
+import com.kaoyan.model.ReleaseItem;
 import com.kaoyan.model.TestItem;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import rx.Observable;
 
 /**
@@ -39,5 +43,9 @@ public interface CommonApi {
 
     @GET("v2/598ab678110000c700515cc0")
     Observable<TestItem> getTestItem2();
+
+    @Multipart
+    @POST("API/users.ashx?action=trade&user_id=17895&isbn=16549898&pro_name=test&author=test&publishing=11&price_market=0&price_sell=0&quantity=&stuff_status=&remark=&link_name=&link_phone=&university=&location=")
+    Observable<BaseItem<ReleaseItem>> upload(@Part MultipartBody.Part file);
 
 }

@@ -1,5 +1,7 @@
 package com.kaoyan.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -8,12 +10,15 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.kaoyan.R;
+import com.kaoyan.utils.LogUtil;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -48,15 +53,17 @@ public class CustomHeader extends LinearLayout implements RefreshHeader{
         setGravity(Gravity.CENTER);
         imageView = new ImageView(context);
         imageView.setImageResource(R.mipmap.ic_launcher);
+        addView(imageView);
     }
 
     @Override
     public void onPullingDown(float percent, int offset, int headerHeight, int extendHeight) {
-
+        LogUtil.i(" header  onPullingDown");
     }
 
     @Override
     public void onReleasing(float percent, int offset, int headerHeight, int extendHeight) {
+        LogUtil.i(" header  onReleasing");
 
     }
 
@@ -89,27 +96,35 @@ public class CustomHeader extends LinearLayout implements RefreshHeader{
     @Override
     public void onStartAnimator(RefreshLayout layout, int height, int extendHeight) {
 
-        imageView.setAnimation(new RotateAnimation(0f,45f));
+//        imageView.setAnimation(new RotateAnimation(0f,45f));
+//        imageView.animate().rotation(36000).setDuration(100000);
+        LogUtil.i(" header  onStartAnimator");
 
-        mAnimatorRotate = ObjectAnimator.ofFloat(imageView, "rotation", 0.0f,360.0f);
-        mAnimatorRotate.setRepeatMode(ValueAnimator.REVERSE);
-        mAnimatorRotate.setRepeatCount(2);
-        mAnimatorRotate.setDuration(2000);
-        mAnimatorRotate.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//        imageView.setPivotX(imageView.getWidth() / 2);
+//        imageView.setPivotY(imageView.getHeight() /2);
+        mAnimatorRotate = ObjectAnimator.ofFloat(imageView, "rotation", 0.0f,40.0f,0.0f,-40.0f,0.0f);
+        mAnimatorRotate.setRepeatMode(ValueAnimator.RESTART);
+        mAnimatorRotate.setInterpolator(new LinearInterpolator());
+        mAnimatorRotate.setRepeatCount(5);
+        mAnimatorRotate.setDuration(800);
+        mAnimatorRotate.addListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
+            public void onAnimationCancel(Animator animation) {
 
             }
         });
         mAnimatorRotate.start();
-        mAnimatorRotate.setIntValues();
+//        mAnimatorRotate.setIntValues();
     }
 
     @Override
     public int onFinish(RefreshLayout layout, boolean success) {
+//        imageView.animate().rotation(0).setDuration(300);
         if(mAnimatorRotate != null){
-            mAnimatorRotate.cancel();
+//            mAnimatorRotate.cancel();
+            mAnimatorRotate.end();
         }
+        LogUtil.i(" header  onFinish");
         return 500;
     }
 

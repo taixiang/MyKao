@@ -55,12 +55,12 @@ public class ActFragment extends BaseFragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                tab.setText("unselected");
+
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                tab.setText("reselected");
+
             }
         });
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

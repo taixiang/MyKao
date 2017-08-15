@@ -91,6 +91,7 @@ public class Test2Activity extends BaseActivity implements IMainView {
 //        p.login();
         LogUtil.i(" EventBus  " + EventBus.getDefault().toString());
         EventBus.getDefault().post(new LoginEvent());
+        setResult(99);
         finish();
     }
 

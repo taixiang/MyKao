@@ -59,7 +59,7 @@ public class ExampleInstrumentedTest
 
     @Test
     public void getTest(){
-        ToastUtils.showToast(appContext,"11111");
+//        ToastUtils.showToast(appContext,"11111");
     }
 
 }

@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kaoyan.R;
+import com.kaoyan.api.RetrofitService;
 import com.kaoyan.base.BaseFragment;
 import com.kaoyan.event.LoginEvent;
+import com.kaoyan.model.BaseItem;
+import com.kaoyan.model.ReleaseItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
@@ -32,8 +35,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by tx on 2017/8/1.
@@ -97,6 +104,28 @@ public class MeFragment extends BaseFragment {
             LogUtil.i(" imageitem === path "  + images.get(0).path);
 
             ImgManager.loadImage(mActivity,new File(images.get(0).path),iv);
+            File file = new File(images.get(0).path);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"),file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("picture",file.getName(),requestBody);
+//            RetrofitService.commonApi.upload(body).subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .compose(this.<BaseItem<ReleaseItem>>bindToLife())
+//                    .subscribe(new Subscriber<BaseItem<ReleaseItem>>() {
+//                        @Override
+//                        public void onCompleted() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable  e) {
+//                            LogUtil.i(" e=== "+e.toString());
+//                        }
+//
+//                        @Override
+//                        public void onNext(BaseItem<ReleaseItem> releaseItemBaseItem) {
+//                            LogUtil.i(" releaseItemBaseItem "+releaseItemBaseItem.toString());
+//                        }
+//                    });
 
 //            String path =  getAbsolutePath(mActivity,data.getData());
 //            File file = new File(path);

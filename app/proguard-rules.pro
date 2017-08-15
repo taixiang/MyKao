@@ -114,6 +114,11 @@ public static java.lang.String TABLENAME;
   public *;
 }
 
+# banner
+-keep class com.youth.banner.** {
+    *;
+ }
+
 #eventBus
 -keepattributes *Annotation*
 -keepclassmembers class ** {

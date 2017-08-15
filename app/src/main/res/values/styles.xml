@@ -20,6 +20,17 @@
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
     </style>
 
+
+    <style name="EasyDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <!--默认Activity页面切换样式-->
     <style name="Animation.Activity.Style" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/right_in</item>

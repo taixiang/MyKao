@@ -1,6 +1,8 @@
 package com.kaoyan;
 
+import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kaoyan.base.BaseActivity;
+import com.kaoyan.event.LoginEvent;
 import com.kaoyan.fragment.BannerItemFragment;
 import com.kaoyan.fragment.TestFragment;
 import com.kaoyan.model.BannerItem;
@@ -27,6 +30,10 @@ import com.kaoyan.module.me.MeFragment;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -67,6 +74,7 @@ public class MainActivity extends BaseActivity implements IMainView{
     @Override
     protected void init() {
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+//        EventBus.getDefault().register(this);
 
           setUpFragmentTabHost();
 //        Rect outRect = new Rect();
@@ -107,6 +115,13 @@ public class MainActivity extends BaseActivity implements IMainView{
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+
+    }
+
     private void setUpFragmentTabHost(){
         tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         tabHost.setup(MainActivity.this,MainActivity.this.getSupportFragmentManager(),android.R.id.tabcontent);
@@ -130,6 +145,15 @@ public class MainActivity extends BaseActivity implements IMainView{
         TextView textView = (TextView) view.findViewById(R.id.textview);
         textView.setText(mTextviewArray[index]);
         return view;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtil.i("  loginSuccess  resultcode  " + resultCode);
+        if(resultCode == 99){
+            tabHost.setCurrentTab(3);
+        }
     }
 
     @Override
