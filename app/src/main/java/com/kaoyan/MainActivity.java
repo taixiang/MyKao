@@ -162,6 +162,7 @@ public class MainActivity extends BaseActivity implements IMainView{
 
     @Override
     public void loadNovel(FindItem item) {
+        
 
 
     }
