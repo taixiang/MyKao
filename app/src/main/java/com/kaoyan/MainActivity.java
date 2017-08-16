@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     protected void init() {
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 //        EventBus.getDefault().register(this);
-
+        String test = "test";
         setUpFragmentTabHost();
 //        Rect outRect = new Rect();
 //        getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect);
