@@ -46,6 +46,16 @@
             android:name=".module.guide.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GuideTheme"/>
+        
+        <provider
+            android:authorities="com.kaoyan.fileprovide"
+            android:name="android.support.v4.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"
+                />
+        </provider>
     </application>
 
 </manifest>

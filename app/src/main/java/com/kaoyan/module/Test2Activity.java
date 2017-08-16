@@ -1,9 +1,12 @@
 package com.kaoyan.module;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,6 +40,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+import com.yanzhenjie.permission.PermissionListener;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RationaleListener;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -90,10 +98,43 @@ public class Test2Activity extends BaseActivity implements IMainView {
     void click() {
 //        p.login();
         LogUtil.i(" EventBus  " + EventBus.getDefault().toString());
-        EventBus.getDefault().post(new LoginEvent());
-        setResult(99);
-        finish();
+//        EventBus.getDefault().post(new LoginEvent());
+//        setResult(99);
+//        finish();
+        AndPermission.with(Test2Activity.this)
+                .requestCode(100)
+                .rationale(new RationaleListener() {
+                    @Override
+                    public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
+                        AndPermission.rationaleDialog(Test2Activity.this,rationale).show();
+                    }
+                })
+                .permission(Manifest.permission.CAMERA)
+                .callback(listener)
+                .start();
     }
+
+    private PermissionListener listener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+            LogUtil.i("requestCode onSucceed"+requestCode);
+            if(AndPermission.hasPermission(Test2Activity.this,Manifest.permission.CAMERA)){
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(intent);
+            }
+        }
+
+        @Override
+        public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+            LogUtil.i("requestCode onFailed"+requestCode);
+            if(AndPermission.hasPermission(Test2Activity.this,Manifest.permission.CAMERA)){
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(intent);
+            }else {
+
+            }
+        }
+    };
 
     @Override
     public void loadNoData() {
