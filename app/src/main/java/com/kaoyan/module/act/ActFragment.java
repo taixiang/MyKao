@@ -13,6 +13,7 @@ import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;
 import com.kaoyan.fragment.BannerItemFragment;
 import com.kaoyan.model.CourseListItem;
+import com.kaoyan.module.ques.QuesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ActFragment extends BaseFragment {
     @Override
     protected void init() {
         list.add(new ActListFragment());
-        list.add(new BannerItemFragment());
+        list.add(new QuesFragment());
         list.add(new BannerItemFragment());
         adapter = new MyFragAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);

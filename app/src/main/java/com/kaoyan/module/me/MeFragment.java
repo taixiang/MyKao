@@ -7,6 +7,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +24,10 @@ import com.kaoyan.model.ReleaseItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
+import com.kaoyan.widget.CardPagerAdapter;
 import com.kaoyan.widget.LoadingDialog;
+import com.kaoyan.widget.ShadowTransformer;
+import com.kaoyan.widget.SlideFromBottomPopup;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -31,6 +39,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,8 +62,12 @@ public class MeFragment extends BaseFragment {
     @BindView(R.id.tv_name)
     TextView tv_name;
 
+    @BindView(R.id.pager)
+    ViewPager pager;
+
     @BindView(R.id.iv)
     ImageView iv;
+    private List<String> list = new ArrayList<>();
     @Override
     protected int attachLayoutRes() {
         return R.layout.fragment_me;
@@ -65,9 +78,45 @@ public class MeFragment extends BaseFragment {
         ImgManager.loadImage(mActivity,"http://m.iisbn.com/images_side/1.jpg",imageView);
         EventBus.getDefault().register(this);
         LogUtil.i(" EventBus  "+EventBus.getDefault().toString());
-
+        list.add("http://m.iisbn.com/images_side/11_11.jpg");
+        list.add("http://m.iisbn.com/images_side/1.jpg");
+//        list.add("http://m.iisbn.com/images_side/5.jpg");
+//        list.add("http://m.iisbn.com/images_side/6.jpg");
+//        list.add("http://m.iisbn.com/images_side/2.jpg");
+        pager.setAdapter(new UlViewPagerAdapter());
+        pager.setPageMargin(50);
+        pager.setOffscreenPageLimit(3);
+//        pager.setPageMargin(-30);
 //        RequestBody requestBody = RequestBody.create()
 //        MultipartBody.Part body = MultipartBody.Part.createFormData();
+    }
+
+    private class UlViewPagerAdapter extends PagerAdapter {
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.adapter_ulviewpager,null);
+            ImageView imageView = view.findViewById(R.id.iv);
+            ImgManager.loadImage(mActivity,list.get(position),imageView);
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
     }
 
     @Override
@@ -80,15 +129,20 @@ public class MeFragment extends BaseFragment {
 
     @OnClick(R.id.iv_circle)
     void startImg(){
-        Intent intent = new Intent(mActivity, ImageGridActivity.class);
-        startActivityForResult(intent, 1);
+//        Intent intent = new Intent(mActivity, ImageGridActivity.class);
+//        startActivityForResult(intent, 1);
 
 //        Intent intent = new Intent(mActivity, Test2Activity.class);
 //        startActivity(intent);
+
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 //        intent.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(intent,1);
+
+        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
+        popup.showPopupWindow();
+
     }
 
     @Override

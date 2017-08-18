@@ -2,6 +2,7 @@ package com.kaoyan.module.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -100,6 +101,23 @@ public class HomeFragment extends BaseFragment implements HomeView {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
                 ImgManager.loadImage(context, (String) path, imageView);
+            }
+        });
+        banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                LogUtil.i(" onPageSelected  "+position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
         presenter.getData(false);

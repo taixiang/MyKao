@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/bgColor"
     android:layout_width="match_parent"
@@ -21,20 +22,20 @@
                 android:layout_height="match_parent">
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
-                    android:background="@color/viewBgColor"
+                    android:background="@color/colorWhite"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"/>
 
                 <com.kaoyan.widget.CustomGridView
                     android:id="@+id/gv_category"
                     android:numColumns="4"
-                    android:background="@color/viewBgColor"
+                    android:background="@color/colorWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <LinearLayout
                     android:layout_marginTop="20dp"
-                    android:background="@color/viewBgColor"
+                    android:background="@color/colorWhite"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -66,7 +67,7 @@
 
                 <LinearLayout
                     android:layout_marginTop="20dp"
-                    android:background="@color/viewBgColor"
+                    android:background="@color/colorWhite"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

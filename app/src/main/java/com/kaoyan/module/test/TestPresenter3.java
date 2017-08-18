@@ -48,6 +48,7 @@ public class TestPresenter3 implements IBasePresenter {
 
                     @Override
                     public void onNext(Object o) {
+                        view.login();
                         if(o instanceof BaseItem){
                             LogUtil.i(" merge FindItem "+((BaseItem)o).toString());
                             if((List<FindItem.Find>)((BaseItem) o).pros instanceof List){

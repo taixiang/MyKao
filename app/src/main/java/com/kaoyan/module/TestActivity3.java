@@ -3,8 +3,15 @@ package com.kaoyan.module;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -24,7 +31,9 @@ import com.kaoyan.module.test.TestPresenter3;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.view.IMainView;
+import com.tmall.ultraviewpager.UltraViewPager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -53,6 +62,11 @@ public class TestActivity3 extends BaseActivity implements IMainView {
 
     @BindView(R.id.photoView)
     ImageView photoView;
+
+    @BindView(R.id.ultra_viewpager)
+    ViewPager viewPager;
+    private List<String> list = new ArrayList<>();
+    UlViewPagerAdapter adapter;
     @Override
     protected int attachLayoutRes() {
         return R.layout.activity_test3;
@@ -71,6 +85,59 @@ public class TestActivity3 extends BaseActivity implements IMainView {
         });
         t = new TestPresenter3(this);
         t.getData(false);
+
+//        adapter = new UlViewPagerAdapter();
+//        viewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
+//        viewPager.setAdapter(adapter);
+
+//        viewPager.setMultiScreen(0.9f);
+
+
+//        viewPager.initIndicator();
+//        viewPager.getIndicator()
+//                .setOrientation(UltraViewPager.Orientation.HORIZONTAL)
+//                .setFocusColor(Color.RED)
+//                .setNormalColor(Color.GRAY)
+//                .setFocusResId(R.drawable.shape_home_indicator_selected)
+//                .setNormalResId(R.drawable.shape_home_indicator_unselected)
+//                .setIndicatorPadding(10)
+//                .setRadius((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
+//                .build();
+//        viewPager.setInfiniteLoop(true);
+//        viewPager.setAutoScroll(2000);
+
+    }
+
+    private class UlViewPagerAdapter extends PagerAdapter{
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.adapter_ulviewpager,null);
+            ImageView imageView = view.findViewById(R.id.iv);
+            ImgManager.loadImage(mActivity,list.get(position),imageView);
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public float getPageWidth(int position) {
+            return 0.9f;
+        }
     }
 
     private void performEnterAnimation() {
@@ -258,7 +325,14 @@ public class TestActivity3 extends BaseActivity implements IMainView {
 
     @Override
     public void login() {
-
+        LogUtil.i("  login login ");
+        list.add("http://m.iisbn.com/images_side/11_11.jpg");
+        list.add("http://m.iisbn.com/images_side/1.jpg");
+        list.add("http://m.iisbn.com/images_side/5.jpg");
+        list.add("http://m.iisbn.com/images_side/6.jpg");
+        list.add("http://m.iisbn.com/images_side/2.jpg");
+        adapter = new UlViewPagerAdapter();
+        viewPager.setAdapter(adapter);
     }
 
     @Override

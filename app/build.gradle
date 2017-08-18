@@ -94,4 +94,16 @@ dependencies {
     compile 'com.github.markzhai:blockcanary-android:1.5.0'
     //AndPermission
     compile 'com.yanzhenjie:permission:1.1.0'
+    //BasePopup
+    compile 'com.github.razerdp:BasePopup:v1.8.0'
+
+    compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
+    compile 'com.android.support:support-v4:26.0.0-alpha1'
+
+    compile ('com.alibaba.android:ultraviewpager:1.0.6@aar') {
+        transitive = true
+    }
+
+    compile 'com.pixplicity.multiviewpager:library:1.0'
+
 }
