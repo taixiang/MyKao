@@ -79,6 +79,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     @BindView(android.R.id.tabs)
     TabWidget tabWidget;
 
+    @BindView(R.id.container)
+    LinearLayout container;
 
     //定义数组来存放Fragment界面
     private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, ActFragment.class, MeFragment.class};
@@ -284,6 +286,10 @@ public class MainActivity extends BaseActivity implements IMainView {
      */
     private View getTabItemView(int index) {
         View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.tab_item_view, null);
+        LinearLayout container = view.findViewById(R.id.container);
+//        if(index == 0){
+//            container.setClipChildren(true);
+//        }
         ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
         imageView.setImageResource(mImageViewArray[index]);
         TextView textView = (TextView) view.findViewById(R.id.textview);
