@@ -83,13 +83,13 @@ public class MainActivity extends BaseActivity implements IMainView {
     LinearLayout container;
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, ActFragment.class, MeFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, ActFragment.class, MeFragment.class,MeFragment.class};
     //定义数组来存放按钮图片
-    private int mImageViewArray[] = {R.drawable.selector_tab_img, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
+    private int mImageViewArray[] = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.drawable.selector_tab_img, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};
 
     //Tab选项卡的文字
-    private String mTextviewArray[] = {"首页", "选课", "活动", "我的"};
+    private String mTextviewArray[] = {"首页", "选课", "活动", "我的","我的"};
 
     private long exitTime = 0;
     private CommonDialog.Builder builder;
@@ -286,7 +286,6 @@ public class MainActivity extends BaseActivity implements IMainView {
      */
     private View getTabItemView(int index) {
         View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.tab_item_view, null);
-        LinearLayout container = view.findViewById(R.id.container);
 //        if(index == 0){
 //            container.setClipChildren(true);
 //        }
