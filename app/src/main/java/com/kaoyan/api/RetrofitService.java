@@ -11,6 +11,7 @@ import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.model.NovelItem;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.NetUtil;
+import com.shanbay.mock.MockApiSuite;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
 import java.io.File;
@@ -76,6 +77,7 @@ public class RetrofitService {
 //                .addInterceptor(tokenInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -91,6 +93,7 @@ public class RetrofitService {
                 .build();
         commonApi = retrofit.create(CommonApi.class);
     }
+
 
     private static HttpLoggingInterceptor.Logger loggerInterceptor = new HttpLoggingInterceptor.Logger() {
         @Override

@@ -105,5 +105,6 @@ dependencies {
     }
 
     compile 'com.pixplicity.multiviewpager:library:1.0'
+    compile 'com.shanbay.android:mock-api:0.0.1'
 
 }
