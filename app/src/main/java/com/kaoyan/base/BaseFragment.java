@@ -64,6 +64,7 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
             mRootView = inflater.inflate(attachLayoutRes(), null);
             ButterKnife.bind(this, mRootView);
         }
+
         ViewGroup parent = (ViewGroup) mRootView.getParent();
         if (parent != null) {
             parent.removeView(mRootView);
@@ -72,8 +73,18 @@ public abstract class BaseFragment extends RxFragment implements IBaseView {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ViewGroup parent = (ViewGroup) mRootView.getParent();
+        if (parent != null) {
+            parent.removeView(mRootView);
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         if (getUserVisibleHint() && mRootView != null && !mIsMulti) {
             mIsMulti = true;
             init();

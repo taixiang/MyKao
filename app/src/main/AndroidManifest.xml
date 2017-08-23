@@ -46,7 +46,8 @@
             android:name=".module.guide.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GuideTheme"/>
-        
+        <activity android:name=".module.Test4Act" />
+
         <provider
             android:authorities="com.kaoyan.fileprovide"
             android:name="android.support.v4.content.FileProvider"

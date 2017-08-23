@@ -24,6 +24,7 @@ import com.kaoyan.base.BaseFragment;
 import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.TestItem;
 import com.kaoyan.module.Test2Activity;
+import com.kaoyan.module.Test4Act;
 import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.DensityUtil;
 import com.kaoyan.utils.ImgManager;
@@ -134,8 +135,11 @@ public class HomeFragment extends BaseFragment implements HomeView {
                 if(CommonUtil.isfastdoubleClick()){
                     return;
                 }
-                Intent intent = new Intent(mActivity, Test2Activity.class);
-                mActivity.startActivityForResult(intent,98);
+//                Intent intent = new Intent(mActivity, Test2Activity.class);
+//                mActivity.startActivityForResult(intent,98);
+
+                Intent intent = new Intent(mActivity, Test4Act.class);
+                mActivity.startActivity(intent);
             }
         });
     }
