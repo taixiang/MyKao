@@ -76,11 +76,11 @@ public class CommonUtil {
     /**
      * 手机号验证
      * @param phoneNo
-     * @return 是否是手机号
+     * @return 是否是手机号 "^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$"
      */
     public static boolean checkPhoneNo(String phoneNo) {
         Pattern p = Pattern
-                .compile("^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$");
+                .compile("^(1[34578])\\d{9}$");
         Matcher m = p.matcher(phoneNo);
         return m.matches();
     }

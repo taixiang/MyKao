@@ -27,6 +27,7 @@ public class DbOpenHelper extends DaoMaster.OpenHelper {
     @Override
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
         LogUtil.i(" oldVer "+oldVersion + "  newVer "+newVersion );
+
         MigrationHelper.getInstance().migrate(db,UserDao.class,TestDao.class);
     }
 }
