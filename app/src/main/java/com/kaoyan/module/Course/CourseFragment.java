@@ -39,8 +39,7 @@ public class CourseFragment extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
-    @BindView(R.id.iv)
-    ImageView iv;
+
     @BindView(R.id.first)
     TextView first;
     @BindView(R.id.second)
