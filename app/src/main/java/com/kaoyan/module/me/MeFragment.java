@@ -21,6 +21,7 @@ import com.kaoyan.base.BaseFragment;
 import com.kaoyan.event.LoginEvent;
 import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.ReleaseItem;
+import com.kaoyan.module.StickyActivity;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
@@ -140,9 +141,11 @@ public class MeFragment extends BaseFragment {
 //        intent.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(intent,1);
 
-        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
-        popup.showPopupWindow();
+//        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
+//        popup.showPopupWindow();
 
+        Intent intent = new Intent(mActivity, StickyActivity.class);
+        startActivity(intent);
     }
 
     @Override

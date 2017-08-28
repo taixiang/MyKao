@@ -158,7 +158,7 @@ public class CourseListFragment extends BaseFragment implements IMainView {
         adapter = null;
         if (adapter == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-            adapter = new TestAdapter(R.layout.adapter_keywords, list);
+            adapter = new TestAdapter(R.layout.adapter_keywords, list,mActivity);
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

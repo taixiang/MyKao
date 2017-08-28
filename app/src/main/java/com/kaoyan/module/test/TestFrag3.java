@@ -9,20 +9,27 @@ import android.view.ViewGroup;
 import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;
 import com.kaoyan.utils.LogUtil;
+import com.kaoyan.widget.SimpleViewPagerIndicator;
+
+import butterknife.BindView;
 
 /**
  * Created by tx on 2017/8/23.
  */
 
 public class TestFrag3 extends BaseFragment {
+
+    @BindView(R.id.id_stickynavlayout_indicator)
+    SimpleViewPagerIndicator indicator;
+    String[] title = {"1","2","3"};
     @Override
     protected int attachLayoutRes() {
-        return R.layout.fragment_act;
+        return R.layout.frag_test3;
     }
 
     @Override
     protected void init() {
-
+        indicator.setTitles(title);
     }
 
 

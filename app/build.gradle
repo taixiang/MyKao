@@ -106,5 +106,5 @@ dependencies {
 
     compile 'com.pixplicity.multiviewpager:library:1.0'
     compile 'com.shanbay.android:mock-api:0.0.1'
-
+    compile 'com.nex3z:flow-layout:1.0.0'
 }

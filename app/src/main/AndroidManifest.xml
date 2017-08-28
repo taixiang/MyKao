@@ -47,6 +47,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/GuideTheme"/>
         <activity android:name=".module.Test4Act" />
+        <activity android:name=".module.StickyActivity" />
 
         <provider
             android:authorities="com.kaoyan.fileprovide"

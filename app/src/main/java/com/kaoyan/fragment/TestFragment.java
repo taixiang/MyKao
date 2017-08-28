@@ -146,7 +146,7 @@ public class TestFragment extends BaseFragment implements IMainView {
         if (adapter == null) {
             Log.i("》》》》》  ", " adapter notifyData fail ");
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-            adapter = new TestAdapter(R.layout.adapter_keywords, list);
+            adapter = new TestAdapter(R.layout.adapter_keywords, list,mActivity);
 //            adapter2 = new TestAdapter2(mActivity,list,R.layout.adapter_keywords);
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
@@ -174,7 +174,7 @@ public class TestFragment extends BaseFragment implements IMainView {
         if (adapter == null) {
             Log.i("》》》》》  ", " adapter notifyData fail ");
             recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-            adapter = new TestAdapter(R.layout.adapter_keywords, list);
+            adapter = new TestAdapter(R.layout.adapter_keywords, list,mActivity);
 //            adapter2 = new TestAdapter2(mActivity,list,R.layout.adapter_keywords);
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
