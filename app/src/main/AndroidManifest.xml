@@ -48,6 +48,7 @@
             android:theme="@style/GuideTheme"/>
         <activity android:name=".module.Test4Act" />
         <activity android:name=".module.StickyActivity" />
+        <activity android:name=".module.StickyActivity2" />
 
         <provider
             android:authorities="com.kaoyan.fileprovide"
