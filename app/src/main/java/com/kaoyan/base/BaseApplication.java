@@ -11,6 +11,7 @@ import com.kaoyan.R;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.database.DaoMaster;
 import com.kaoyan.database.DaoSession;
+import com.kaoyan.demo.RequestUtil;
 import com.kaoyan.utils.AppBlockCanaryContext;
 import com.kaoyan.utils.CrashHandler;
 import com.kaoyan.utils.GreenDaoManager;
@@ -52,6 +53,7 @@ public class BaseApplication extends Application {
             LogUtil.isDebug = true;
 //        }
         RetrofitService.init(this);
+        RequestUtil.init(this);
         GreenDaoManager.getInstance(this);
         initSmartRefreshLayout();
 //        CrashHandler.getInstance().init(this);

@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     LinearLayout container;
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, MeFragment.class, MeFragment.class,MeFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, MeFragment.class, com.kaoyan.demo.TestFragment.class,MeFragment.class};
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.drawable.selector_tab_img, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};

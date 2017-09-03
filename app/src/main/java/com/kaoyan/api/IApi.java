@@ -1,5 +1,7 @@
 package com.kaoyan.api;
 
+import com.kaoyan.bean.BaseBean;
+import com.kaoyan.bean.FindBean;
 import com.kaoyan.database.Test;
 import com.kaoyan.model.BaseItem;
 import com.kaoyan.model.FindItem;
@@ -31,8 +33,18 @@ public interface IApi {
     @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
     Observable<BaseItem<List<FindItem.Find>>> getFind(@Query("pageIndex")int page);
 
+
+//    @Headers("Content-Type:application/json; charset=utf-8")
+//    @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
+//    Observable<BaseBean<List<FindBean.Find>>> getFind2(@Query("pageIndex")int page);
+
     @Headers("token:"+"33333")
     @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
     Call<FindItem> getFindItem(@Query("pageIndex")int page);
+
+
+    @Headers("Content-Type:application/json; charset=utf-8")
+    @GET("Handler/List.ashx?action=findBookListAPI&keywords=")
+    Observable<String> getFind3(@Query("pageIndex")int page);
 
 }
