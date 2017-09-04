@@ -34,6 +34,11 @@ public class SlideFromBottomPopup extends BasePopupWindow implements View.OnClic
     }
 
     @Override
+    protected Animation initExitAnimation() {
+        return getTranslateAnimation(0,250 * 3, 300);
+    }
+
+    @Override
     public View getClickToDismissView() {
         return popupView.findViewById(R.id.click_to_dismiss);
     }

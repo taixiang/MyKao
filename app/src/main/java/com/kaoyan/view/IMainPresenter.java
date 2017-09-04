@@ -118,6 +118,9 @@ public class IMainPresenter implements LoginPresenter {
 
     @Override
     public void getMoreData() {
+
+        doGetFind();
+
 //        getFind(page).compose(mView.<FindItem>bindToLife()).
 //                subscribe(new Subscriber<FindItem>() {
 //                    @Override

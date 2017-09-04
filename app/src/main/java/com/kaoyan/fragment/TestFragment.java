@@ -82,7 +82,7 @@ public class TestFragment extends BaseFragment implements IMainView {
         LogUtil.i("  11111  "+Thread.currentThread().getName());
 
         presenter.loadBanner();
-        refreshLayout.setEnableRefresh(false);
+//        refreshLayout.setEnableRefresh(false);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {

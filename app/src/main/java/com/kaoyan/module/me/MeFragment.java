@@ -142,11 +142,11 @@ public class MeFragment extends BaseFragment {
 //        intent.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(intent,1);
 
-//        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
-//        popup.showPopupWindow();
+        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
+        popup.showPopupWindow();
 
-        Intent intent = new Intent(mActivity, StickyActivity2.class);
-        startActivity(intent);
+//        Intent intent = new Intent(mActivity, StickyActivity2.class);
+//        startActivity(intent);
     }
 
     @Override
