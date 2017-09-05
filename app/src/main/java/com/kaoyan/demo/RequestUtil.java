@@ -89,11 +89,7 @@ public class RequestUtil {
                         BaseBean baseBean = GsonUtils.jsonToClass(tBaseItem,BaseBean.class);
                         return Observable.just(tBaseItem);
                     }
-                }).doOnSubscribe(new Action0() {
-            @Override
-            public void call() {
-            }
-        }).compose(l).subscribe(new Subscriber<String>() {
+                }).compose(l).subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
 

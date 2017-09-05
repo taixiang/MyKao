@@ -62,7 +62,7 @@ public class BannerItemFragment extends BaseFragment {
     @OnClick(R.id.insert)
     void insert(){
         i++;
-        User user = new User(null,i+""," "+i);
+        User user = new User(null,i+""," "+i,"sex");
         userDao.insert(user);
         LogUtil.i("userList ===  insert ");
     }

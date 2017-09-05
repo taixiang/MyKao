@@ -83,13 +83,13 @@ public class MainActivity extends BaseActivity implements IMainView {
     LinearLayout container;
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, MeFragment.class, com.kaoyan.demo.TestFragment.class,MeFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, BannerItemFragment.class, com.kaoyan.demo.TestFragment.class,BannerItemFragment.class};
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.drawable.selector_tab_img, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};
 
     //Tab选项卡的文字
-    private String mTextviewArray[] = {"首页", "选课", "活动", "我的","我的"};
+    private String mTextviewArray[] = {"首页", "选课", "活动", "我的","我的1"};
 
     private long exitTime = 0;
     private CommonDialog.Builder builder;

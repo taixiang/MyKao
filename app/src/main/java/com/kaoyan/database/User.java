@@ -12,28 +12,30 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 
 @Entity
-public class User implements Parcelable{
+public class User {
     @Id
     private Long id;
     private String name;
     private String age;
+    private String sex;
 
-    protected User(Parcel in) {
-        name = in.readString();
-        age = in.readString();
+
+
+
+    @Generated(hash = 596426048)
+    public User(Long id, String name, String age, String sex) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
+    @Generated(hash = 586692638)
+    public User() {
+    }
 
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
+    
+
 
     public String getAge() {
         return age;
@@ -43,18 +45,6 @@ public class User implements Parcelable{
         this.age = age;
     }
 
-
-
-    @Generated(hash = 1666193281)
-    public User(Long id, String name, String age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
-    @Generated(hash = 586692638)
-    public User() {
-    }
 
     public Long getId() {
         return id;
@@ -81,14 +71,11 @@ public class User implements Parcelable{
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getSex() {
+        return this.sex;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(age);
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

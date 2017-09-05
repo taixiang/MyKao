@@ -5,7 +5,7 @@ package com.kaoyan.demo;
  */
 
 public interface DataView {
-    void  onGetDataFailured(Throwable e, String requestTag);
+    void onGetDataFailured(Throwable e, String requestTag);
 
     void onGetDataSuccess(String result, String requestTag);
 }
