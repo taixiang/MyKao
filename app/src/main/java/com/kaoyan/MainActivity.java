@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import butterknife.BindView;
-import io.reactivex.schedulers.Schedulers;
 import rx.Observable;
 import rx.Scheduler;
 import rx.Subscriber;

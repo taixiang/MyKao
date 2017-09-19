@@ -49,6 +49,7 @@
         <activity android:name=".module.Test4Act" />
         <activity android:name=".module.StickyActivity" />
         <activity android:name=".module.StickyActivity2" />
+        <activity android:name=".module.viewpager.ViewpageAct" />
 
         <provider
             android:authorities="com.kaoyan.fileprovide"
