@@ -1,4 +1,4 @@
-package com.kaoyan.demo;
+package com.kaoyan.servicedemo;
 
 import com.kaoyan.R;
 import com.kaoyan.base.BaseFragment;

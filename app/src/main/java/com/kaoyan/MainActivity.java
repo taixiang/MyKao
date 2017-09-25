@@ -7,40 +7,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kaoyan.base.BaseActivity;
-import com.kaoyan.event.LoginEvent;
 import com.kaoyan.fragment.BannerItemFragment;
-import com.kaoyan.fragment.TestFragment;
 import com.kaoyan.model.BannerItem;
 import com.kaoyan.model.FindItem;
 import com.kaoyan.model.HomeMiddleItem;
 import com.kaoyan.module.Course.CourseFragment;
-import com.kaoyan.module.Test2Activity;
-import com.kaoyan.module.act.ActFragment;
 import com.kaoyan.module.home.HomeFragment;
-import com.kaoyan.module.me.MeFragment;
-import com.kaoyan.utils.CommonUtil;
 import com.kaoyan.utils.LogUtil;
 import com.kaoyan.utils.ToastUtils;
 import com.kaoyan.view.IMainView;
@@ -50,27 +38,12 @@ import com.yanzhenjie.permission.PermissionListener;
 import com.yanzhenjie.permission.Rationale;
 import com.yanzhenjie.permission.RationaleListener;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.logging.Logger;
 
 import butterknife.BindView;
-import io.reactivex.schedulers.Schedulers;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.os.Environment.getExternalStorageDirectory;
 
 
 public class MainActivity extends BaseActivity implements IMainView {
@@ -83,7 +56,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     LinearLayout container;
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, BannerItemFragment.class, com.kaoyan.demo.TestFragment.class,BannerItemFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class, CourseFragment.class, BannerItemFragment.class, com.kaoyan.servicedemo.TestFragment.class,BannerItemFragment.class};
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.drawable.selector_tab_img, R.mipmap.ic_launcher,
             R.mipmap.ic_launcher};

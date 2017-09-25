@@ -2,24 +2,18 @@ package com.kaoyan.base;
 
 import android.app.Application;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import com.github.moduth.blockcanary.BlockCanary;
-import com.kaoyan.BuildConfig;
 import com.kaoyan.R;
 import com.kaoyan.api.RetrofitService;
 import com.kaoyan.database.DaoMaster;
 import com.kaoyan.database.DaoSession;
-import com.kaoyan.demo.RequestUtil;
+import com.kaoyan.servicedemo.RequestUtil;
 import com.kaoyan.utils.AppBlockCanaryContext;
-import com.kaoyan.utils.CrashHandler;
 import com.kaoyan.utils.GreenDaoManager;
 import com.kaoyan.utils.ImagePickerLoader;
 import com.kaoyan.utils.LogUtil;
-import com.kaoyan.utils.ToastUtils;
-import com.kaoyan.widget.CustomHeader;
-import com.kaoyan.widget.PtrHeader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -30,7 +24,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.squareup.leakcanary.LeakCanary;
 

@@ -1,11 +1,10 @@
-package com.kaoyan.demo;
+package com.kaoyan.servicedemo;
 
 import android.content.Context;
 
 import com.kaoyan.api.CommonApi;
 import com.kaoyan.api.IApi;
 import com.kaoyan.bean.BaseBean;
-import com.kaoyan.model.BaseItem;
 import com.kaoyan.utils.GsonUtils;
 import com.kaoyan.utils.LogUtil;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -22,7 +21,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 

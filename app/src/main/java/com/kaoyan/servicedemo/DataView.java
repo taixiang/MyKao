@@ -1,4 +1,4 @@
-package com.kaoyan.demo;
+package com.kaoyan.servicedemo;
 
 /**
  * Created by tx on 2017/9/2.
