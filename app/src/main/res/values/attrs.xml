@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--我的页面列表item-->
+    <declare-styleable name="MeItemView">
+        <attr name="itemTxt" format="string"/>
+        <attr name="itemIcon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TabViewPager">
+        <attr name="canScroll" format="boolean"/>
+        <attr name="smoothAnimation" format="boolean"/>
+    </declare-styleable>
+
+    <!--倒计时-->
+    <declare-styleable name="CountDownView">
+        <attr name="timeSize" format="dimension"/>
+        <attr name="labelSize" format="dimension"/>
+    </declare-styleable>
+
+    <!--banner-->
+    <declare-styleable name="BannerView">
+        <attr name="banner_line_color" format="color"/>
+    </declare-styleable>
+
+</resources>

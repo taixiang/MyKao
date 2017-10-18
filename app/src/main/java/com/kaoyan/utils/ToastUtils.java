@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.kaoyan.base.BaseApplication;
+
 /**
  * Created by tx on 2017/7/17.
  * 避免同样的信息多次触发重复弹出的问题
@@ -18,7 +20,7 @@ public class ToastUtils {
 
     public static void showToast(Context context,String s) {
         if (toast == null) {
-            toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
+            toast = Toast.makeText(BaseApplication.getInstance(), s, Toast.LENGTH_SHORT);
             toast.show();
             oneTime = System.currentTimeMillis();
         } else {

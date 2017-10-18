@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.kaoyan.R;
 import com.kaoyan.utils.LogUtil;
+import com.kaoyan.utils.StatusBarUtil;
 import com.kaoyan.widget.EmptyLayout;
 import com.kaoyan.widget.LoadingDialog;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -84,6 +85,12 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
         ButterKnife.bind(this);
         mActivity = this;
         init();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        StatusBarUtil.setStatusBarTxtMode(getWindow());
     }
 
     /**

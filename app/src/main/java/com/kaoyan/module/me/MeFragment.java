@@ -24,6 +24,7 @@ import com.kaoyan.model.ReleaseItem;
 import com.kaoyan.module.Test2Activity;
 import com.kaoyan.utils.ImgManager;
 import com.kaoyan.utils.LogUtil;
+import com.kaoyan.utils.ToastUtils;
 import com.kaoyan.widget.CardPagerAdapter;
 import com.kaoyan.widget.LoadingDialog;
 import com.kaoyan.widget.ShadowTransformer;
@@ -129,8 +130,8 @@ public class MeFragment extends BaseFragment {
 
     @OnClick(R.id.iv_circle)
     void startImg(){
-//        Intent intent = new Intent(mActivity, ImageGridActivity.class);
-//        startActivityForResult(intent, 1);
+        Intent intent = new Intent(mActivity, ImageGridActivity.class);
+        startActivityForResult(intent, 1);
 
 //        Intent intent = new Intent(mActivity, Test2Activity.class);
 //        startActivity(intent);
@@ -140,8 +141,8 @@ public class MeFragment extends BaseFragment {
 //        intent.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(intent,1);
 
-        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
-        popup.showPopupWindow();
+//        SlideFromBottomPopup popup = new SlideFromBottomPopup(mActivity);
+//        popup.showPopupWindow();
 
     }
 

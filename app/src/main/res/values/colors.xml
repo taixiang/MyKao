@@ -6,4 +6,6 @@
     <color name="colorAccentTans">#55248654</color>
     <color name="bgColor">#f5f5f5</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="banner_blue">#25abcd</color>
+
 </resources>
